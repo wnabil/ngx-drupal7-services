@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "tsc -d"
+    "build": "tsc -d",
+    "clean": "find src -type f -name '*.d.ts' -delete && find src -type f -name '*.js' -delete && rm index.js && rm index.d.ts"
   },
   "private": true,
   "dependencies": {
