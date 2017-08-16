@@ -40,11 +40,11 @@ export class MainService {
     return request_url;
   }
 
-  private httpRequestWithConfig(HttpObservableRequest: Observable<any>, toJson: boolean = true): Observable<any> {
+  private httpRequestWithConfig(httpObservableRequest: Observable<any>, toJson: boolean = true): Observable<any> {
     if (toJson) {
-      return this.httpRequestWithConfig(HttpObservableRequest, false).map(res => res.json());
+      return this.httpRequestWithConfig(httpObservableRequest, false).map(res => res.json());
     }
-    return HttpObservableRequest.timeout(this.timeout).catch(err => Observable.throw(err));
+    return httpObservableRequest.timeout(this.timeout).catch(err => Observable.throw(err));
   }
 
   get(entityType: string, selector?: string | number, toJson: boolean = true): Observable<any> {
