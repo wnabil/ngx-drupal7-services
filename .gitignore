@@ -38,5 +38,5 @@ Thumbs.db
 # build files 
 *.js
 *.map
-*.d.js
+*.d.ts
 
