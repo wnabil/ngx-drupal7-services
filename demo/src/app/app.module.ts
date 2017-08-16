@@ -3,12 +3,15 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
+import { Drupal7ServicesModule } from '../../../';
+
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    Drupal7ServicesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
