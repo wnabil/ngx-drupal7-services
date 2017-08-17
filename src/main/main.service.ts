@@ -6,7 +6,7 @@ import { DrupalConstants } from '../application/drupal-constants';
 
 @Injectable()
 export class MainService {
-  private timeout: number = 20000;
+  protected entityType: string;
 
   constructor(private http: Http, public cookieService: CookieService) { }
 
@@ -22,19 +22,19 @@ export class MainService {
     return options;
   }
 
-  private getURL(entityType: string, selector?: string | number, without_end_point?: boolean): string {
+  private fullRequestURL(resource: string, selector?: string | number): string {
     var request_url = DrupalConstants.Settings.restUrl;
 
-    if (without_end_point) {
-      request_url = DrupalConstants.Settings.backEndUrl;
+    if (this.entityType) {
+      request_url += this.entityType + '/';
     }
 
-    if (entityType) {
-      request_url += entityType + '/';
+    if (resource) {
+      request_url += resource + '/  ';
     }
 
     if (selector) {
-      request_url = request_url + selector;
+      request_url += selector;
     }
 
     return request_url;
@@ -44,30 +44,36 @@ export class MainService {
     if (toJson) {
       return this.httpRequestWithConfig(httpObservableRequest, false).map(res => res.json());
     }
-    return httpObservableRequest.timeout(this.timeout).catch(err => Observable.throw(err));
+    return httpObservableRequest.timeout(DrupalConstants.Settings.requestTimeout).catch(err => Observable.throw(err));
   }
 
-  get(entityType: string, selector?: string | number, toJson: boolean = true): Observable<any> {
+  get(resource: string, selector?: string | number): Observable<Response> {
     return this.httpRequestWithConfig(
-      this.http.get(this.getURL(entityType, selector, toJson), this.options), toJson
+      this.http.get(this.fullRequestURL(resource, selector), this.options)
     );
   }
 
-  post(entityType: string, body?: any): Observable<any> {
+  post(resource: string, body: any = {}): Observable<Response> {
     return this.httpRequestWithConfig(
-      this.http.post(this.getURL(entityType), body ? body : {}, this.options),
+      this.http.post(this.fullRequestURL(resource), this.options),
     );
   }
 
-  put(entityType: string, selector: number | string, body: any): Observable<any> {
+  put(resource: string, selector: number | string, body: any): Observable<Response> {
     return this.httpRequestWithConfig(
-      this.http.put(this.getURL(entityType, selector), body, this.options),
+      this.http.put(this.fullRequestURL(resource, selector), body, this.options),
     );
   }
 
-  delete(entityType: string, selector: string | number): Observable<any> {
+  delete(resource: string, selector: string | number): Observable<Response> {
     return this.httpRequestWithConfig(
-      this.http.delete(this.getURL(entityType, selector), this.options),
+      this.http.delete(this.fullRequestURL(resource, selector), this.options),
     );
+  }
+
+  protected getToken(): Observable<string> {
+    return this.httpRequestWithConfig(
+      this.http.get(`${DrupalConstants.Settings.backEndUrl}services/session/token`, this.options), false
+    ).map(res => res.text());
   }
 }

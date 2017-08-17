@@ -1,10 +1,11 @@
 export class Settings {
-  apiProtocol: 'http'|'https' = 'http';
+  apiProtocol: 'http' | 'https' = 'http';
   apiHost: string = 'localhost';
-  apiPort: number = 333;
+  apiPort: number;
   apiEndPoint: string = 'api';
   language: string = 'und';
 
+  requestTimeout: number = 5000;
   get backEndUrl(): string {
     const url = this.apiProtocol + '://' + this.apiHost;
     return this.apiPort ? url + ':' + this.apiPort + '/' : url + '/';
