@@ -48,5 +48,34 @@ export class AppComponent {
     // });
   }
 
+  updateUser() {
+    this.result.name = 'root';
+    this.userService.updateUser(this.result).subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  deleteUser() {
+    this.userService.deleteUser(2).subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  login() {
+    const user = {
+      username: "root",
+      password: "root"
+    }
+    this.userService.login(user).subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  logout() {
+    this.userService.logout().subscribe(data => {
+      console.log(data);
+    });
+  }
+
 }
 

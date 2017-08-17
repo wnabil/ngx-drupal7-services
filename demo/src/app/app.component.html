@@ -1,9 +1,13 @@
 <div *ngIf="settings.connection">
   <h2>connected</h2>
   <button (click)="connect()">system connect</button>
-  <button (click)="getUser()">get user by id 1</button>
+  <button (click)="getUser()">get user 1</button>
   <button (click)="getAllUsers()">get all users</button>
   <button (click)="createUser()">create user</button>
+  <button (click)="updateUser()">update user</button>
+  <button (click)="deleteUser()">delete user</button>
+  <button (click)="login()">login</button>
+  <button (click)="logout()">logout</button>
   <br><br><br>
   {{result|json}}
 </div>

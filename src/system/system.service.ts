@@ -49,34 +49,4 @@ export class SystemService extends MainService {
   del_variable(variableName) {
     return;
   }
-
-  public saveSession(sessid: string, session_name: string, timestamp: number, token?: string): void {
-    if (token) {
-      this.cookieService.put("token", token);
-    }
-    this.cookieService.put("sessid", sessid);
-    this.cookieService.put("session_name", session_name);
-    this.cookieService.put("timestamp", timestamp.toString());
-  }
-
-  public removeSession(): void {
-    this.cookieService.remove("token");
-    this.cookieService.remove("sessid");
-    this.cookieService.remove("session_name");
-    this.cookieService.remove("timestamp");
-  }
-
-  private isConnected(): boolean {
-    return this.cookieService.get("token") &&
-    this.cookieService.get("sessid") &&
-    this.cookieService.get("session_name") &&
-    !this.isConnectionExpired() ?
-    true : false;
-  }
-
-  private isConnectionExpired(): boolean {
-    const nowTS = Math.floor(Date.now());
-    const expirationTS = 1987200000;
-    return nowTS - +this.cookieService.get("timestamp") < expirationTS
-  }
 }

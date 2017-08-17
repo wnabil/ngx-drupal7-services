@@ -100,7 +100,7 @@ export class MainService {
    */
   post(resource: string = '', body: any = {}): Observable<any> {
     return this.httpRequestWithConfig(
-      this.http.post(this.fullRequestURL(resource), this.options),
+      this.http.post(this.fullRequestURL(resource), body, this.options),
     );
   }
 
@@ -137,5 +137,35 @@ export class MainService {
     return this.httpRequestWithConfig(
       this.http.get(`${DrupalConstants.Settings.backEndUrl}services/session/token`, this.options), false
     ).map(res => res.text());
+  }
+
+  protected removeSession(): void {
+    this.cookieService.remove("token");
+    this.cookieService.remove("sessid");
+    this.cookieService.remove("session_name");
+    this.cookieService.remove("timestamp");
+  }
+
+  public saveSession(sessid: string, session_name: string, timestamp: number, token?: string): void {
+    if (token) {
+      this.cookieService.put("token", token);
+    }
+    this.cookieService.put("sessid", sessid);
+    this.cookieService.put("session_name", session_name);
+    this.cookieService.put("timestamp", timestamp.toString());
+  }
+
+  protected isConnected(): boolean {
+    return this.cookieService.get("token") &&
+    this.cookieService.get("sessid") &&
+    this.cookieService.get("session_name") &&
+    !this.isConnectionExpired() ?
+    true : false;
+  }
+
+  protected isConnectionExpired(): boolean {
+    const nowTS = Math.floor(Date.now());
+    const expirationTS = 1987200000;
+    return nowTS - +this.cookieService.get("timestamp") < expirationTS
   }
 }

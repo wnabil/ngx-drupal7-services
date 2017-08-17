@@ -7,7 +7,7 @@ export interface User {
   init?: string,
   language?: string,
   login?: number,
-  picture?: number// TODO
+  picture?: number,
   roles?: {[rid: number]: string},
   signature?: string,
   signature_format?: string,
@@ -15,4 +15,11 @@ export interface User {
   theme?: number,
   timezone?: string,
   uid?: number,
+  timestamp?: number,
+  password?: string,
+}
+
+export interface LoginCredentials {
+  username: string,
+  password: string,
 }
