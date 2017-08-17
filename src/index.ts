@@ -8,6 +8,7 @@ import { HttpModule } from '@angular/http';
 /**
  * modules imports
  */
+import { Subscription } from 'rxjs/Rx';
 import { CookieModule } from 'ngx-cookie';
 
 /**
@@ -17,19 +18,21 @@ import { DrupalConstants } from './application/drupal-constants';
 import { MainService } from './main/main.service';
 import { SystemService } from './system/system.service';
 import { UserService } from './user/user.service';
+import { SystemConnection } from './models/system'
 
 /**
  * implement APP_INITIALIZER
  * @param systemService system service to connect
  * @see https://gillespie59.github.io/2016/12/04/angular2-code-before-rendering.html
  */
-function init(systemService: SystemService) {
+export function init(systemService: SystemService): () => Promise<SystemConnection> {
   return () => {
-    const connectionObservable = systemService.connect();
-    return connectionObservable.subscribe(connection => {
+    const connectionObservable = systemService.connect().toPromise();
+    connectionObservable.then(connection => {
       systemService.saveSession(connection.sessid, connection.session_name, connection.user.timestamp);
       DrupalConstants.Settings.connection = connection;
     });
+    return connectionObservable;
   };
 }
 

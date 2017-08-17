@@ -16,7 +16,6 @@ export class AppComponent {
     private userService: UserService,
     private systemService: SystemService,
   ) {
-
   }
 
   connect() {
@@ -40,13 +39,13 @@ export class AppComponent {
   }
 
   createUser() {
-    const user = {
-      name: "test",
-      mail: "awdwad@awwad.com",
-    };
-    this.userService.createUser(user).subscribe(data => {
-      console.log(data)
-    });
+    // const user = {
+    //   name: "test",
+    //   mail: "awdwad@awwad.com",
+    // };
+    // this.userService.createUser(user).subscribe(data => {
+    //   console.log(data)
+    // });
   }
 
 }

@@ -28,8 +28,9 @@ export class SystemService extends MainService {
       this.removeSession();
     }
 
+    this.cookieService.remove("token");
     return this.getToken().flatMap(token => {
-      this.saveToken(token);
+      this.cookieService.put("token", token);
       return this.post("connect");
     });
   }
@@ -51,7 +52,7 @@ export class SystemService extends MainService {
 
   public saveSession(sessid: string, session_name: string, timestamp: number, token?: string): void {
     if (token) {
-      this.saveToken(token);
+      this.cookieService.put("token", token);
     }
     this.cookieService.put("sessid", sessid);
     this.cookieService.put("session_name", session_name);
@@ -63,10 +64,6 @@ export class SystemService extends MainService {
     this.cookieService.remove("sessid");
     this.cookieService.remove("session_name");
     this.cookieService.remove("timestamp");
-  }
-
-  private saveToken(token: string): void {
-    this.cookieService.put("token", token);
   }
 
   private isConnected(): boolean {

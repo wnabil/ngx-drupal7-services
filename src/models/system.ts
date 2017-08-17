@@ -1,4 +1,4 @@
-interface UserConnect {
+export interface UserConnect {
   cache: number,
   hostname: string,
   roles: string[],
