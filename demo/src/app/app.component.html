@@ -1,3 +1,14 @@
-<div>
-  test
+<div *ngIf="!settings.connection">
+    Please wait while connecting
+    'SPINNER'
+</div>
+
+<div *ngIf="settings.connection">
+  <h2>connected</h2>
+  <button (click)="connect()">system connect</button>
+  <button (click)="getUser()">get user by id 1</button>
+  <button (click)="getAllUsers()">get all users</button>
+  <button (click)="createUser()">create user</button>
+  <br><br><br>
+  {{result|json}}
 </div>
