@@ -29,5 +29,13 @@
   <button (click)="deleteFile()">delete file</button>
   <button (click)="createRaw()">create raw</button>
   <br><br><br>
+  <button (click)="getAllComments()">get all comments</button>
+  <button (click)="getCommentById()">get comment by ud</button>
+  <button (click)="createComment()">create comment</button>
+  <button (click)="updateComment()">update comment</button>
+  <button (click)="deleteComment()">delete comment</button>
+  <button (click)="countAllByNodeId()">count comments by node id</button>
+  <button (click)="countNewCommentsByNodeId()">count new comments by node id</button>
+  <br><br><br>
   {{result|json}}
 </div>

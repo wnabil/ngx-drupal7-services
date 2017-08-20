@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { MainService, DrupalConstants, UserService, SystemService, NodeService, FileAttach, FileService } from '../../../';
+import {
+  MainService, DrupalConstants, UserService, SystemService, NodeService, FileAttach, FileService,
+  CommentService
+} from '../../../';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +18,7 @@ export class AppComponent {
     private systemService: SystemService,
     private nodeService: NodeService,
     private fileService: FileService,
+    private commentService: CommentService,
   ) {
   }
 
@@ -214,6 +218,61 @@ export class AppComponent {
     this.fileService.createRaw().subscribe(data => {
       console.log(data);
     })
+  }
+
+  ///////////////////////////////////////////////////
+
+  getAllComments() {
+    this.commentService.getAllComments().subscribe(data => {
+      console.log(data);
+    })
+  }
+
+  getCommentById() {
+    this.commentService.getCommentById(1).subscribe(data => {
+      console.log(data);
+    })
+  }
+
+  createComment() {
+    const comment = {
+      nid: 2,
+      subject: 'awdwadwadda',
+      comment_body: {und: [{value: 'adwdwaadw'}]}
+    };
+    this.commentService.createComment(comment).subscribe(data => {
+      console.log(data);
+    })
+  }
+
+  updateComment() {
+    const comment = {
+      cid: 4,
+      nid: 2,
+      subject: 'eeeeee',
+      comment_body: {und: [{value: 'adwdwwwwwwwaadw'}]}
+    };
+    this.commentService.updateComment(comment).subscribe(data => {
+      console.log(data);
+    })
+  }
+
+  deleteComment() {
+    this.commentService.deleteComment(4).subscribe(data => {
+      console.log(data);
+    })
+  }
+
+  countAllByNodeId(nid: number) {
+    this.commentService.countAllCommentsByNodeId(2).subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  countNewCommentsByNodeId(nid: number) {
+    this.commentService.countNewCommentsByNodeId(2).subscribe(data => {
+      console.log(data);
+    });
   }
 
 }
