@@ -204,7 +204,7 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
 - install [CORS](https://www.drupal.org/project/cors) 
 - Go to admin/config/services/cors  and paste following into the textarea   
 
-`api/v1*|<mirror>|POST,PUT,GET,DELETE|Content-Type,Authorization,X-CSRF-TOKEN|true`.
+`api/<mirror>|POST,PUT,GET,DELETE|Content-Type,Authorization,X-CSRF-TOKEN|true`.
 
 ### OR Configure your nginx
 ```
