@@ -3,7 +3,7 @@
   "version": "0.0.3-beta",
   "license": "MIT",
   "scripts": {
-    "build": "tsc -d",
+    "build": "ngc -p tsconfig.json",
     "clean": "find src -type f -name '*.d.ts' -delete && find src -type f -name '*.js' -delete && rm index.js && rm index.d.ts"
   },
   "private": false,

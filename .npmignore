@@ -1,3 +1,6 @@
 demo/
 node_modules/
 *.ts
+!*.d.ts
+*.ngsummary.json
+*.js.map
