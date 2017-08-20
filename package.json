@@ -1,6 +1,6 @@
 {
   "name": "ngx-drupal7-services",
-  "version": "0.0.2-beta",
+  "version": "0.0.3-beta",
   "license": "MIT",
   "scripts": {
     "build": "tsc -d",
