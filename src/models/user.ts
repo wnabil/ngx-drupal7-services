@@ -1,20 +1,16 @@
-export interface User {
+import { Entity, CreatedEntity } from './entity';
+
+export interface User extends Entity {
   mail: string,
-  name: string,
   access?: number,
-  created?: number,
   data?: boolean,
   init?: string,
-  language?: string,
   login?: number,
-  picture?: number,
   roles?: {[rid: number]: string},
   signature?: string,
   signature_format?: string,
-  status?: number,
   theme?: number,
   timezone?: string,
-  uid?: number,
   timestamp?: number,
   pass?: string,
 }
@@ -24,9 +20,8 @@ export interface LoginCredentials {
   password: string,
 }
 
-export interface CreatedUser {
+export interface CreatedUser extends CreatedEntity {
   uid: number,
-  uri: string,
 }
 
 export interface PasswordReset {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MainService, DrupalConstants, UserService, SystemService } from '../../../';
+import { MainService, DrupalConstants, UserService, SystemService, NodeService, FileAttach } from '../../../';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +13,7 @@ export class AppComponent {
   constructor(
     private userService: UserService,
     private systemService: SystemService,
+    private nodeService: NodeService,
   ) {
   }
 
@@ -121,5 +122,61 @@ export class AppComponent {
     });
   }
 
+  ///////////////////////////////////////////////////////////////////////////
+
+
+  getNodeById() {
+    this.nodeService.getNodeById(1).subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  createNode() {
+    const node = {
+      title: 'adwadw',
+      type: 'article'
+    }
+    this.nodeService.createNode(node).subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  updateNode() {
+    const node = {
+      nid: 1,
+      title: 'eeeeee',
+      type: 'article'
+    }
+    this.nodeService.updateNode(node).subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  deleteNode() {
+    this.nodeService.deleteNode(1).subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  files() {
+    this.nodeService.files(2).subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  comments() {
+    this.nodeService.comments(2).subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  attachFilesToNode() {
+    const file = {
+      field_name: 'field_image',
+    };
+    this.nodeService.attachFilesToNode(2, file).subscribe(data => {
+      console.log(data);
+    });
+  }
 }
 

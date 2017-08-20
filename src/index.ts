@@ -18,7 +18,8 @@ import { DrupalConstants } from './application/drupal-constants';
 import { MainService } from './main/main.service';
 import { SystemService } from './system/system.service';
 import { UserService } from './user/user.service';
-import { SystemConnection } from './models/system'
+import { NodeService } from './node/node.service';
+import { SystemConnection } from './models/system';
 
 /**
  * implement APP_INITIALIZER
@@ -55,7 +56,8 @@ export function init(systemService: SystemService): () => Promise<SystemConnecti
     },
     MainService,
     SystemService,
-    UserService
+    UserService,
+    NodeService,
   ],
 })
 export class Drupal7ServicesModule { }
@@ -73,4 +75,5 @@ export {
   MainService,
   SystemService,
   UserService,
+  NodeService,
 };
