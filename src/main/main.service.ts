@@ -86,7 +86,7 @@ export class MainService {
    * @param selector the selector for some requests like getting a node by number ex: node/'1'
    * @return http json response
    */
-  get(resource: string = '', selector?: number): Observable<any> {
+  protected get(resource: string = '', selector?: number): Observable<any> {
     return this.httpRequestWithConfig(
       this.http.get(this.fullRequestURL(resource, selector), this.options)
     );
@@ -98,7 +98,7 @@ export class MainService {
    * @param body the contenct of the request
    * @return http json response
    */
-  post(resource: string = '', body: any = {}): Observable<any> {
+  protected post(resource: string = '', body: any = {}): Observable<any> {
     return this.httpRequestWithConfig(
       this.http.post(this.fullRequestURL(resource), body, this.options),
     );
@@ -111,7 +111,7 @@ export class MainService {
    * @param body the contenct of the request
    * @return http json response
    */
-  put(resource: string = '', selector: number, body: any): Observable<any> {
+  protected put(resource: string = '', selector: number, body: any): Observable<any> {
     return this.httpRequestWithConfig(
       this.http.put(this.fullRequestURL(resource, selector), body, this.options),
     );
@@ -123,7 +123,7 @@ export class MainService {
    * @param selector the selector to delete
    * @return http json response
    */
-  delete(resource: string = '', selector: number): Observable<any> {
+  protected delete(resource: string = '', selector: number): Observable<any> {
     return this.httpRequestWithConfig(
       this.http.delete(this.fullRequestURL(resource, selector), this.options),
     );

@@ -19,6 +19,7 @@ import { MainService } from './main/main.service';
 import { SystemService } from './system/system.service';
 import { UserService } from './user/user.service';
 import { NodeService } from './node/node.service';
+import { FileService } from './file/file.service';
 import { SystemConnection } from './models/system';
 
 /**
@@ -58,6 +59,7 @@ export function init(systemService: SystemService): () => Promise<SystemConnecti
     SystemService,
     UserService,
     NodeService,
+    FileService
   ],
 })
 export class Drupal7ServicesModule { }
@@ -76,4 +78,5 @@ export {
   SystemService,
   UserService,
   NodeService,
+  FileService
 };
