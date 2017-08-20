@@ -1,12 +1,12 @@
 {
   "name": "ngx-drupal7-services",
-  "version": "0.0.0",
+  "version": "0.0.1-beta",
   "license": "MIT",
   "scripts": {
     "build": "tsc -d",
     "clean": "find src -type f -name '*.d.ts' -delete && find src -type f -name '*.js' -delete && rm index.js && rm index.d.ts"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@angular/animations": "^4.0.0",
     "@angular/common": "^4.0.0",
@@ -41,5 +41,22 @@
     "ts-node": "~3.0.4",
     "tslint": "~5.3.2",
     "typescript": "~2.3.3"
-  }
+  },
+  "description": "# Angular 2+/Ionic 2+ Drupal 7 Services #### Typescript angular modules for [Drupal Services 3.x](https://www.drupal.org/project/services)",
+  "main": "index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wnabil/ngx-drupal7-services.git"
+  },
+  "keywords": [
+    "Angular",
+    "Drupal7",
+    "Services",
+    "Typescript"
+  ],
+  "author": "Wassem Nabil <w.nabil@orangestudio.com> (http://arabianlolers.com)",
+  "bugs": {
+    "url": "https://github.com/wnabil/ngx-drupal7-services/issues"
+  },
+  "homepage": "https://github.com/wnabil/ngx-drupal7-services#readme"
 }
