@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {
   MainService, DrupalConstants, UserService, SystemService, NodeService, FileAttach, FileService,
-  CommentService, TaxonomyTermService
+  CommentService, TaxonomyTermService, TaxonomyVocabularyService
 } from '../../../';
 
 @Component({
@@ -20,6 +20,7 @@ export class AppComponent {
     private fileService: FileService,
     private commentService: CommentService,
     private taxonomyTermService: TaxonomyTermService,
+    private taxonomyVocabularyService: TaxonomyVocabularyService
   ) {
   }
 
@@ -319,6 +320,58 @@ export class AppComponent {
 
   getAllNodesForTerm() {
     this.taxonomyTermService.getAllNodesForTerm(1).subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  ///////////////////////////////////////
+
+  getAllVocabularies() {
+    this.taxonomyVocabularyService.getAllVocabularies().subscribe(data => {
+      console.log(data);
+    })
+  }
+
+  getTaxonomyVocabularyById() {
+    this.taxonomyVocabularyService.getTaxonomyVocabularyById(1).subscribe(data => {
+      console.log(data);
+    })
+  }
+
+  createTaxonomyVocabulary() {
+    const vocabulary = {
+      name: "voca"
+    };
+    this.taxonomyVocabularyService.createTaxonomyVocabulary(vocabulary).subscribe(data => {
+      console.log(data);
+    })
+  }
+
+  updateTaxonomyVocabulary() {
+    const vocabulary = {
+      name: "test",
+      vid: 6,
+      machine_name: "voeeeeca"
+    };
+    this.taxonomyVocabularyService.updateTaxonomyVocabulary(vocabulary).subscribe(data => {
+      console.log(data);
+    })
+  }
+
+  deleteTaxonomyVocabulary() {
+    this.taxonomyVocabularyService.deleteTaxonomyVocabulary(6).subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  getTaxonomyVocabularyByMachineName() {
+    this.taxonomyVocabularyService.getTaxonomyVocabularyByMachineName("tags").subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  getTaxonomyVocabularyTree() {
+    this.taxonomyVocabularyService.getTaxonomyVocabularyTree(1).subscribe(data => {
       console.log(data);
     });
   }

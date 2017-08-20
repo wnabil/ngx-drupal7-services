@@ -6,3 +6,5 @@ export { User, LoginCredentials, CreatedUser, PasswordReset, PasswordResetRespon
 export { NodeEntity, CreatedNode, FileAttach } from './node';
 export { FileEntity, CreatedFile } from './file';
 export { CommentEntity, CreatedComment } from './comment';
+export { TaxonomyTerm } from './taxonomy-term';
+export { TaxonomyVocabulary, TaxonomyVocabularyTree } from './taxonomy-vocabulary';
