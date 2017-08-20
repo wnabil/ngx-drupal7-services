@@ -37,5 +37,12 @@
   <button (click)="countAllByNodeId()">count comments by node id</button>
   <button (click)="countNewCommentsByNodeId()">count new comments by node id</button>
   <br><br><br>
+  <button (click)="getAllTaxonomyTerms()">get all taxonomy terms</button>
+  <button (click)="getTaxonomyTermById()">get taxonomy term by id</button>
+  <button (click)="createTaxonomyTerm()">create term</button>
+  <button (click)="updateTaxonomyTerm()">update taxonomy term</button>
+  <button (click)="deleteTaxonomyTerm()">delete taxonomy term</button>
+  <button (click)="getAllNodesForTerm()">get all nodes for term id</button>
+  <br><br><br>
   {{result|json}}
 </div>

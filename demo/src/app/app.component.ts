@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {
   MainService, DrupalConstants, UserService, SystemService, NodeService, FileAttach, FileService,
-  CommentService
+  CommentService, TaxonomyTermService
 } from '../../../';
 
 @Component({
@@ -19,6 +19,7 @@ export class AppComponent {
     private nodeService: NodeService,
     private fileService: FileService,
     private commentService: CommentService,
+    private taxonomyTermService: TaxonomyTermService,
   ) {
   }
 
@@ -271,6 +272,53 @@ export class AppComponent {
 
   countNewCommentsByNodeId(nid: number) {
     this.commentService.countNewCommentsByNodeId(2).subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  ///////////////////////////////////////////////////
+
+  getAllTaxonomyTerms() {
+    this.taxonomyTermService.getAllTaxonomyTerms().subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  getTaxonomyTermById() {
+    this.taxonomyTermService.getTaxonomyTermById(1).subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  createTaxonomyTerm() {
+    const term = {
+      name: 'test1',
+      vid: 1,
+    }
+    this.taxonomyTermService.createTaxonomyTerm(term).subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  updateTaxonomyTerm() {
+    const term = {
+      tid: 3,
+      name: 'wdawdawadwdwadawd',
+      vid: 1,
+    }
+    this.taxonomyTermService.updateTaxonomyTerm(term).subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  deleteTaxonomyTerm() {
+    this.taxonomyTermService.deleteTaxonomyTerm(3).subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  getAllNodesForTerm() {
+    this.taxonomyTermService.getAllNodesForTerm(1).subscribe(data => {
       console.log(data);
     });
   }
