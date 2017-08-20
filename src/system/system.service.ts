@@ -20,8 +20,8 @@ export class SystemService extends MainService {
    * the subscription data is an object of System interface
    */
   connect(): Observable<SystemConnection> {
-    if (DrupalConstants.Settings.connection) {
-      return Observable.of(DrupalConstants.Settings.connection);
+    if (DrupalConstants.Connection) {
+      return Observable.of(DrupalConstants.Connection);
     }
 
     if (this.isConnectionExpired()) {

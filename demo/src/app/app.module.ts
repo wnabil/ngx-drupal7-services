@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
-import { Drupal7ServicesModule } from '../../../';
+import { Drupal7ServicesModule, DrupalConstants, Settings } from '../../../';
 
 @NgModule({
   declarations: [
@@ -16,4 +16,15 @@ import { Drupal7ServicesModule } from '../../../';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor () {
+    const drupalSettings: Settings = {
+      apiEndPoint: 'api',
+      apiHost: 'localhost',
+      apiProtocol: 'http',
+      language: 'und',
+      requestTimeout: 5000,
+    };
+    DrupalConstants.Settings = drupalSettings;
+  }
+}

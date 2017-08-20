@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Rx';
 
 import { MainService } from '../main/main.service';
 import { DrupalConstants } from '../application/drupal-constants';
-import { SystemConnection, User, LoginCredentials } from '../models';
+import { SystemConnection, User, LoginCredentials, CreatedUser, PasswordReset, PasswordResetResponse } from '../models';
 
 /**
  * user service for drupal
@@ -21,7 +21,7 @@ export class UserService extends MainService {
     return this.get();
   }
 
-  createUser(user: User): Observable<User> {
+  createUser(user: User): Observable<CreatedUser> {
     return this.post('', user);
   }
 
@@ -49,6 +49,33 @@ export class UserService extends MainService {
         return this.getToken();
       }
     });
+  }
+
+  requestNewPassword(useranme: string): Observable<boolean[]> {
+    const user = {
+      name: useranme
+    };
+    return this.post('request_new_password', user);
+  }
+
+  userPasswordReset(passwordReset: PasswordReset): Observable<PasswordResetResponse> {
+    return this.post('user_pass_reset', passwordReset);
+  }
+
+  registerAccount(user: User): Observable<CreatedUser> {
+    return this.post('register', user);
+  }
+
+  cancelUser(uid: number): Observable<boolean[]> {
+    return this.post(`${uid}/cancel`);
+  }
+
+  passwordReset(uid: number): Observable<boolean[]> {
+    return this.post(`${uid}/password_reset`);
+  }
+
+  resendWelcomeEmail(uid: number): Observable<boolean[]> {
+    return this.post(`${uid}/resend_welcome_email`);
   }
 
 }

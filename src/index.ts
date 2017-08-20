@@ -30,7 +30,7 @@ export function init(systemService: SystemService): () => Promise<SystemConnecti
     const connectionObservable = systemService.connect().toPromise();
     connectionObservable.then(connection => {
       systemService.saveSession(connection.sessid, connection.session_name, connection.user.timestamp);
-      DrupalConstants.Settings.connection = connection;
+      DrupalConstants.Connection = connection;
     });
     return connectionObservable;
   };

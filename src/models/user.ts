@@ -16,10 +16,26 @@ export interface User {
   timezone?: string,
   uid?: number,
   timestamp?: number,
-  password?: string,
+  pass?: string,
 }
 
 export interface LoginCredentials {
   username: string,
   password: string,
+}
+
+export interface CreatedUser {
+  uid: number,
+  uri: string,
+}
+
+export interface PasswordReset {
+  uid: number,
+  timestamp:  number,
+  hashed_pass: string,
+}
+
+export interface PasswordResetResponse {
+  message: string,
+  pass_reset_token: string,
 }

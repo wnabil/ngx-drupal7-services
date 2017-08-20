@@ -50,14 +50,14 @@ export class MainService {
    * @return full request path after adding the entity type and resource param
    */
   private fullRequestURL(resource: string, selector?: string | number): string {
-    var request_url = DrupalConstants.Settings.restUrl;
+    var request_url = DrupalConstants.restUrl;
 
     if (this.entityType) {
       request_url += this.entityType + '/';
     }
 
     if (resource) {
-      request_url += resource + '/  ';
+      request_url += resource + '/';
     }
 
     if (selector) {
@@ -135,7 +135,7 @@ export class MainService {
    */
   protected getToken(): Observable<string> {
     return this.httpRequestWithConfig(
-      this.http.get(`${DrupalConstants.Settings.backEndUrl}services/session/token`, this.options), false
+      this.http.get(`${DrupalConstants.backEndUrl}services/session/token`, this.options), false
     ).map(res => res.text());
   }
 

@@ -1,4 +1,4 @@
-<div *ngIf="settings.connection">
+<div>
   <h2>connected</h2>
   <button (click)="connect()">system connect</button>
   <button (click)="getUser()">get user 1</button>
@@ -8,6 +8,12 @@
   <button (click)="deleteUser()">delete user</button>
   <button (click)="login()">login</button>
   <button (click)="logout()">logout</button>
+  <button (click)="requestPassword()">request password</button>
+  <button (click)="userPasswordReset()">user password reset</button>
+  <button (click)="registerAccount()">user register</button>
+  <button (click)="cancelUser()">cancel user</button>
+  <button (click)="passwordReset()">password reset</button>
+  <button (click)="resendWelcomeEmail()">resend welcome email</button>
   <br><br><br>
   {{result|json}}
 </div>
