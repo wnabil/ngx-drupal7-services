@@ -1,6 +1,6 @@
 {
   "name": "ngx-drupal7-services",
-  "version": "0.0.3-beta",
+  "version": "0.0.4-beta",
   "license": "MIT",
   "scripts": {
     "build": "npm run clean && tsc -p tsconfig.json",
