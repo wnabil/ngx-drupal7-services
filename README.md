@@ -1,7 +1,7 @@
 # Big thanks to [BioPhoton](https://github.com/BioPhoton) for giving me alot of ideas from his old [AngularJS services project](https://github.com/BioPhoton/ng-drupal-7-services)
 
 # Angular 2+/Ionic 2+ Drupal 7 Services
-#### Typescript angular modules for [Drupal Services 3.x](https://www.drupal.org/project/services)
+#### Typescript angular module for [Drupal Services 3.x](https://www.drupal.org/project/services)
 
 [![npm version](https://badge.fury.io/js/ngx-drupal7-services.svg)](https://badge.fury.io/js/ngx-drupal7-services)  
 [![Package Quality](http://npm.packagequality.com/shield/ngx-drupal7-services.svg)](http://packagequality.com/#?package=ngx-drupal7-services)

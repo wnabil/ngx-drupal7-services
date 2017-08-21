@@ -14,6 +14,7 @@ export class AppComponent {
   result: any;
 
   constructor(
+    private mainService: MainService,
     private userService: UserService,
     private systemService: SystemService,
     private nodeService: NodeService,
@@ -48,6 +49,7 @@ export class AppComponent {
     const user = {
       name: "test",
       mail: "awdwad@awwad.com",
+      pass: "awdawd"
     };
     this.userService.createUser(user).subscribe(data => {
       console.log(data)

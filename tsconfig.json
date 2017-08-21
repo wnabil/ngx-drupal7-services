@@ -14,5 +14,8 @@
   "exclude": [
     "demo/**/*",
     "node_modules/**/*"
-  ]
+  ],
+  "angularCompilerOptions": {
+    "genDir": "./dist"
+  }
 }
