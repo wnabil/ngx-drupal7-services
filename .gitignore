@@ -36,11 +36,4 @@ testem.log
 Thumbs.db
 
 # build files 
-*.js
-*.map
-*.d.ts
-*.ngsummary.json
-*.js.map
-*.metadata.json
-*.ngfactory.json
-
+/lib
