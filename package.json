@@ -50,10 +50,13 @@
     "url": "git+https://github.com/wnabil/ngx-drupal7-services.git"
   },
   "keywords": [
-    "Angular",
-    "Drupal7",
-    "Services",
-    "Typescript"
+    "angular",
+    "drupal7",
+    "services",
+    "typescript",
+    "ng",
+    "ngx",
+    "drupal"
   ],
   "author": "Wassem Nabil <w.nabil@orangestudio.com> (http://arabianlolers.com)",
   "bugs": {

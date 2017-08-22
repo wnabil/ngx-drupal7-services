@@ -8,3 +8,4 @@ export { FileEntity, CreatedFile } from './file';
 export { CommentEntity, CreatedComment } from './comment';
 export { TaxonomyTerm } from './taxonomy-term';
 export { TaxonomyVocabulary, TaxonomyVocabularyTree } from './taxonomy-vocabulary';
+export { ViewOptions } from './view';
