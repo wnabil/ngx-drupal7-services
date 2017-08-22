@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
-import { Drupal7ServicesModule, DrupalConstants, Settings } from '../../../';
+import { Drupal7ServicesModule, DrupalConstants, Settings } from '../../../index';
 
 @NgModule({
   declarations: [

@@ -86,7 +86,7 @@ export class MainService {
    * @param selector the selector for some requests like getting a node by number ex: node/'1'
    * @return http json response
    */
-  protected get(resource: string = '', selector?: number | string): Observable<any> {
+  protected get(resource: string = '', selector?: number): Observable<any> {
     return this.httpRequestWithConfig(
       this.http.get(this.fullRequestURL(resource, selector), this.options)
     );

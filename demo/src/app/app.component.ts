@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import {
   MainService, DrupalConstants, UserService, SystemService, NodeService, FileAttach, FileService,
-  CommentService, TaxonomyTermService, TaxonomyVocabularyService
-} from '../../../';
+  CommentService, TaxonomyTermService, TaxonomyVocabularyService, ViewService, ViewOptions
+} from '../../../index';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +21,8 @@ export class AppComponent {
     private fileService: FileService,
     private commentService: CommentService,
     private taxonomyTermService: TaxonomyTermService,
-    private taxonomyVocabularyService: TaxonomyVocabularyService
+    private taxonomyVocabularyService: TaxonomyVocabularyService,
+    private viewService: ViewService,
   ) {
   }
 
@@ -374,6 +375,19 @@ export class AppComponent {
 
   getTaxonomyVocabularyTree() {
     this.taxonomyVocabularyService.getTaxonomyVocabularyTree(1).subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  /////////////////////////////////////////////////
+
+  getView() {
+    const options: ViewOptions = {
+      filters: {
+        title: 'p',
+      }
+    }
+    this.viewService.getView("test", options).subscribe(data => {
       console.log(data);
     });
   }
