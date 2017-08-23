@@ -19,19 +19,19 @@ export class NodeService extends MainService {
   }
 
   getNodeById(nid: number): Observable<NodeEntity> {
-    return this.get('', nid);
+    return this.get(nid);
   }
 
   createNode(node: NodeEntity): Observable<CreatedNode> {
-    return this.post('', node);
+    return this.post(node);
   }
 
   updateNode(node: NodeEntity): Observable<CreatedNode> {
-    return this.put('', node.nid, node);
+    return this.put(node, node.nid);
   }
 
   deleteNode(nid: number): Observable<boolean[]> {
-    return this.delete('', nid);
+    return this.delete(nid);
   }
 
   files(nid: number): Observable<FileEntity[]> {
@@ -43,7 +43,7 @@ export class NodeService extends MainService {
   }
 
   attachFilesToNode(nid: number, file: FileAttach): Observable<CommentEntity[]> {
-    return this.post(`${nid}/attach_file`, file);
+    return this.post(file, `${nid}/attach_file`);
   }
 
 }

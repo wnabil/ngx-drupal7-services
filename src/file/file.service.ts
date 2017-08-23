@@ -17,15 +17,15 @@ export class FileService extends MainService {
   }
 
   getFileById(fid: number): Observable<FileEntity> {
-    return this.get('', fid);
+    return this.get(fid);
   }
 
   createFile(file: FileEntity): Observable<CreatedFile> {
-    return this.post('', file);
+    return this.post(file);
   }
 
   deleteFile(fid: number): Observable<boolean[]> {
-    return this.delete('', fid);
+    return this.delete(fid);
   }
 
   createRaw(): Observable<boolean[]> {

@@ -10,7 +10,7 @@
   <button (click)="logout()">logout</button>
   <button (click)="requestPassword()">request password</button>
   <button (click)="userPasswordReset()">user password reset</button>
-  <button (click)="registerAccount()">user register</button>
+  <button (click)="register()">user register</button>
   <button (click)="cancelUser()">cancel user</button>
   <button (click)="passwordReset()">password reset</button>
   <button (click)="resendWelcomeEmail()">resend welcome email</button>
@@ -54,5 +54,11 @@
   <button (click)="getTaxonomyVocabularyTree()">get vocabulary tree</button>
   <br><br><br>
   <button (click)="getView()">get view</button>
+  <br><br><br>
+  <button (click)="entityIndex()">index entity</button>
+  <button (click)="entityRetrive()">retrive entity</button>
+  <button (click)="entityDelete()">delete entity</button>
+  <button (click)="entityCreate()">create entity</button>
+  <button (click)="entityUpdate()">update entity</button>
   {{result|json}}
 </div>

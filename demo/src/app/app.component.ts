@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import {
   MainService, DrupalConstants, UserService, SystemService, NodeService, FileAttach, FileService,
-  CommentService, TaxonomyTermService, TaxonomyVocabularyService, ViewService, ViewOptions
+  CommentService, TaxonomyTermService, TaxonomyVocabularyService, ViewService, ViewOptions, EntityService,
+  CustomEntityOptions
 } from '../../../index';
 
 @Component({
@@ -12,6 +13,9 @@ import {
 export class AppComponent {
 
   result: any;
+  entityOptions: CustomEntityOptions = {
+    fields: "title,type"
+  }
 
   constructor(
     private mainService: MainService,
@@ -23,6 +27,7 @@ export class AppComponent {
     private taxonomyTermService: TaxonomyTermService,
     private taxonomyVocabularyService: TaxonomyVocabularyService,
     private viewService: ViewService,
+    private entityService: EntityService,
   ) {
   }
 
@@ -388,6 +393,46 @@ export class AppComponent {
       }
     }
     this.viewService.getView("test", options).subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  ///////////////////////////////////////
+
+  entityIndex() {
+    this.entityService.indexEntity("potato").subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  entityRetrive() {
+    this.entityService.retrieveEntity("potato", 1, this.entityOptions).subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  entityDelete() {
+    this.entityService.deleteEntity("potato", 1).subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  entityCreate() {
+    const entity = {
+      type: 'aaaa'
+    }
+    this.entityService.createEntity("potato", entity).subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  entityUpdate() {
+    const entity = {
+      title: 'new title',
+      type: "aaaa",
+      id: 4
+    }
+    this.entityService.updateEntity("potato", entity, 4).subscribe(data => {
       console.log(data);
     });
   }

@@ -24,6 +24,7 @@ import { CommentService } from './comment/comment.service';
 import { TaxonomyTermService } from './taxonomy/taxonomy-term.service';
 import { TaxonomyVocabularyService } from './taxonomy/taxonomy-vocabulary.service';
 import { ViewService } from './view/view.service';
+import { EntityService } from './entity/entity.service';
 
 import { SystemConnection } from './models/system';
 
@@ -68,7 +69,8 @@ export function init(systemService: SystemService): () => Promise<SystemConnecti
     CommentService,
     TaxonomyTermService,
     TaxonomyVocabularyService,
-    ViewService
+    ViewService,
+    EntityService
   ],
 })
 export class Drupal7ServicesModule {}
@@ -91,5 +93,6 @@ export {
   CommentService,
   TaxonomyTermService,
   TaxonomyVocabularyService,
-  ViewService
+  ViewService,
+  EntityService
 };

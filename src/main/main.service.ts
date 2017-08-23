@@ -23,7 +23,7 @@ export class MainService {
    * @see https://angular.io/guide/dependency-injection
    * @see https://www.npmjs.com/package/ngx-cookie
    */
-  constructor(private http: Http, public cookieService: CookieService) { }
+  constructor(protected http: Http, public cookieService: CookieService) { }
 
   /**
    * a getter to return the required headers for drupal
@@ -43,13 +43,21 @@ export class MainService {
     return options;
   }
 
+  saveSession(sessid: string, session_name: string, timestamp: number, token?: string): void {
+    if (token) {
+      this.cookieService.put("token", token);
+    }
+    this.cookieService.put("sessid", sessid);
+    this.cookieService.put("session_name", session_name);
+    this.cookieService.put("timestamp", timestamp.toString());
+  }
+
   /**
    * building up the full url path for each resource and / or params
    * @param resource the entity resource param. ex: system/'connect', user/'login'
-   * @param selector the selector for some requests like getting a node by number ex: node/'1'
    * @return full request path after adding the entity type and resource param
    */
-  private fullRequestURL(resource: string, selector?: string | number): string {
+  protected fullRequestURL(resource?: string | number): string {
     var request_url = DrupalConstants.restUrl;
 
     if (this.entityType) {
@@ -57,11 +65,7 @@ export class MainService {
     }
 
     if (resource) {
-      request_url += resource + '/';
-    }
-
-    if (selector) {
-      request_url += selector;
+      request_url += resource;
     }
 
     return request_url;
@@ -73,7 +77,7 @@ export class MainService {
    * @param toJson to convert the response to json object
    * @return Observable of the request after adding required configs
    */
-  private httpRequestWithConfig(httpObservableRequest: Observable<any>, toJson: boolean = true): Observable<any> {
+  protected httpRequestWithConfig(httpObservableRequest: Observable<any>, toJson: boolean = true): Observable<any> {
     if (toJson) {
       return this.httpRequestWithConfig(httpObservableRequest, false).map(res => res.json());
     }
@@ -83,12 +87,11 @@ export class MainService {
   /**
    * basic http get request with headers.
    * @param resource the entity resource param. ex: system/'connect', user/'login'
-   * @param selector the selector for some requests like getting a node by number ex: node/'1'
    * @return http json response
    */
-  protected get(resource: string = '', selector?: number): Observable<any> {
+  protected get(resource?: string | number): Observable<any> {
     return this.httpRequestWithConfig(
-      this.http.get(this.fullRequestURL(resource, selector), this.options)
+      this.http.get(this.fullRequestURL(resource), this.options)
     );
   }
 
@@ -98,7 +101,7 @@ export class MainService {
    * @param body the contenct of the request
    * @return http json response
    */
-  protected post(resource: string = '', body: any = {}): Observable<any> {
+  protected post(body: Object = {}, resource?: string | number): Observable<any> {
     return this.httpRequestWithConfig(
       this.http.post(this.fullRequestURL(resource), body, this.options),
     );
@@ -107,25 +110,23 @@ export class MainService {
   /**
    * basic http put request with headers.
    * @param resource the entity resource param. ex: system/'connect', user/'login'
-   * @param selector the selector for some requests like getting a node by number ex: node/'1'
    * @param body the contenct of the request
    * @return http json response
    */
-  protected put(resource: string = '', selector: number, body: any): Observable<any> {
+  protected put(body: Object = {}, resource?: string | number): Observable<any> {
     return this.httpRequestWithConfig(
-      this.http.put(this.fullRequestURL(resource, selector), body, this.options),
+      this.http.put(this.fullRequestURL(resource), body, this.options),
     );
   }
 
   /**
    * basic http delete request with headers.
    * @param resource the entity resource param. ex: system/'connect', user/'login'
-   * @param selector the selector to delete
    * @return http json response
    */
-  protected delete(resource: string = '', selector: number): Observable<any> {
+  protected delete(resource?: string | number): Observable<any> {
     return this.httpRequestWithConfig(
-      this.http.delete(this.fullRequestURL(resource, selector), this.options),
+      this.http.delete(this.fullRequestURL(resource), this.options),
     );
   }
 
@@ -146,15 +147,6 @@ export class MainService {
     this.cookieService.remove("timestamp");
   }
 
-  public saveSession(sessid: string, session_name: string, timestamp: number, token?: string): void {
-    if (token) {
-      this.cookieService.put("token", token);
-    }
-    this.cookieService.put("sessid", sessid);
-    this.cookieService.put("session_name", session_name);
-    this.cookieService.put("timestamp", timestamp.toString());
-  }
-
   protected isConnected(): boolean {
     return this.cookieService.get("token") &&
     this.cookieService.get("sessid") &&
@@ -167,5 +159,35 @@ export class MainService {
     const nowTS = Math.floor(Date.now());
     const expirationTS = 1987200000;
     return nowTS - +this.cookieService.get("timestamp") < expirationTS
+  }
+
+  protected getArgs(options: Object): string {
+    if (!options) {
+      return '';
+    }
+    var args = '?';
+    Object.keys(options).forEach((key, index) => {
+      args += this.optionToString(key, options[key]);
+    });
+    return args;
+  }
+
+  protected optionToString(key: string, value: any): string {
+    if (!value) {
+      return '';
+    }
+    var str = '';
+    if (value instanceof Array) {
+      value.forEach((element, index) => {
+        str += `${key}[${index}]=${element}&`;
+      });
+    } else if (value instanceof Object) {
+      Object.keys(value).forEach((element, index) => {
+        str += `${key}[${element}]=${value[element]}&`;
+      });
+    } else {
+      str += `${key}=${value}&`;
+    }
+    return str;
   }
 }

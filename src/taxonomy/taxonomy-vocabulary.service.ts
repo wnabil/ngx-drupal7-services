@@ -17,27 +17,27 @@ export class TaxonomyVocabularyService extends MainService {
   }
 
   getTaxonomyVocabularyById(vid: number): Observable<TaxonomyVocabulary> {
-    return this.get('', vid);
+    return this.get(vid);
   }
 
   createTaxonomyVocabulary(taxonomyVocabulary: TaxonomyVocabulary): Observable<number[]> {
-    return this.post('', taxonomyVocabulary);
+    return this.post(taxonomyVocabulary);
   }
 
   updateTaxonomyVocabulary(taxonomyVocabulary: TaxonomyVocabulary): Observable<number[]> {
-    return this.put('', taxonomyVocabulary.vid, taxonomyVocabulary);
+    return this.put(taxonomyVocabulary, taxonomyVocabulary.vid);
   }
 
   deleteTaxonomyVocabulary(vid: number): Observable<number[]> {
-    return this.delete('', vid);
+    return this.delete(vid);
   }
 
   getTaxonomyVocabularyByMachineName(vocabularyMachineName: string): Observable<TaxonomyVocabulary> {
-    return this.post('retrieveByMachineName', {machine_name: vocabularyMachineName});
+    return this.post({machine_name: vocabularyMachineName}, 'retrieveByMachineName');
   }
 
   getTaxonomyVocabularyTree(vid: number): Observable<TaxonomyVocabularyTree[]> {
-    return this.post('getTree', {vid: vid});
+    return this.post({vid: vid}, 'getTree');
   }
 
 }

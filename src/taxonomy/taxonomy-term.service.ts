@@ -18,22 +18,22 @@ export class TaxonomyTermService extends MainService {
   }
 
   getTaxonomyTermById(tid: number): Observable<TaxonomyTerm> {
-    return this.get('', tid);
+    return this.get(tid);
   }
 
   createTaxonomyTerm(taxonomyTerm: TaxonomyTerm): Observable<number[]> {
-    return this.post('', taxonomyTerm);
+    return this.post(taxonomyTerm);
   }
 
   updateTaxonomyTerm(taxonomyTerm: TaxonomyTerm): Observable<number[]> {
-    return this.put('', taxonomyTerm.tid, taxonomyTerm);
+    return this.put(taxonomyTerm, taxonomyTerm.tid);
   }
 
   deleteTaxonomyTerm(tid: number): Observable<number[]> {
-    return this.delete('', tid);
+    return this.delete(tid);
   }
 
   getAllNodesForTerm(tid: number): Observable <NodeEntity[]> {
-    return this.post('selectNodes', {tid: tid});
+    return this.post({tid: tid}, 'selectNodes');
   }
 }

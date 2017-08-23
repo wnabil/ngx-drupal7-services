@@ -31,7 +31,7 @@ export class SystemService extends MainService {
     this.cookieService.remove("token");
     return this.getToken().flatMap(token => {
       this.cookieService.put("token", token);
-      return this.post("connect");
+      return this.post({}, "connect");
     });
   }
 

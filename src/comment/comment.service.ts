@@ -17,27 +17,27 @@ export class CommentService extends MainService {
   }
 
   getCommentById(cid: number): Observable<CommentEntity> {
-    return this.get('', cid);
+    return this.get(cid);
   }
 
   createComment(comment: CommentEntity): Observable<CreatedComment> {
-    return this.post('', comment);
+    return this.post(comment);
   }
 
   updateComment(comment: CommentEntity): Observable<number[]> {
-    return this.put('', comment.cid, comment);
+    return this.put(comment, comment.cid);
   }
 
   deleteComment(cid: number): Observable<boolean[]> {
-    return this.delete('', cid);
+    return this.delete(cid);
   }
 
   countAllCommentsByNodeId(nid: number): Observable<number> {
-    return this.post('countAll', {nid: nid});
+    return this.post({nid: nid}, 'countAll');
   }
 
   countNewCommentsByNodeId(nid: number): Observable<number> {
-    return this.post('countNew', {nid: nid});
+    return this.post({nid: nid}, 'countNew');
   }
 
 }

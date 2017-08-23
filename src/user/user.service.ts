@@ -14,7 +14,7 @@ export class UserService extends MainService {
   entityType = 'user';
 
   getUserById(uid: number): Observable<User> {
-    return this.get('', uid);
+    return this.get(uid);
   }
 
   getUsersList(): Observable<User[]> {
@@ -22,19 +22,19 @@ export class UserService extends MainService {
   }
 
   createUser(user: User): Observable<CreatedUser> {
-    return this.post('', user);
+    return this.post(user);
   }
 
   updateUser(user: User): Observable<User> {
-    return this.put('', user.uid, user);
+    return this.put(user, user.uid);
   }
 
   deleteUser(uid: number): Observable<boolean[]> {
-    return this.delete('', uid);
+    return this.delete(uid);
   }
 
   login(user: LoginCredentials): Observable<SystemConnection> {
-    const observer = this.post('login', user);
+    const observer = this.post(user, 'login');
     return observer.map((connection: SystemConnection) => {
       this.saveSession(connection.sessid, connection.session_name, connection.user.login, connection.token);
       return connection;
@@ -55,15 +55,15 @@ export class UserService extends MainService {
     const user = {
       name: useranme
     };
-    return this.post('request_new_password', user);
+    return this.post(user, 'request_new_password');
   }
 
   userPasswordReset(passwordReset: PasswordReset): Observable<PasswordResetResponse> {
-    return this.post('user_pass_reset', passwordReset);
+    return this.post(passwordReset, 'user_pass_reset');
   }
 
   registerAccount(user: User): Observable<CreatedUser> {
-    return this.post('register', user);
+    return this.post(user, 'register');
   }
 
   cancelUser(uid: number): Observable<boolean[]> {
