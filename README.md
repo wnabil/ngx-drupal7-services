@@ -103,11 +103,11 @@ Your must implement your own application configuration for the DrupalConstants.S
 
 ## Supported Drupal Modules
 Here is a list of supported Drupal services 3.x modules "Others are still WIP":
-- [x] [Services](https://www.drupal.org/project/services) **7 Resources** | **51 Requests**
-- [x] [Services Views](https://www.drupal.org/project/services_view) **1 Resources** | **1 Requests**
-- [ ] [Services Menu](https://www.drupal.org/project/services_menu) **1 Resources** | **1 Requests**
-- [ ] [Services Search](https://www.drupal.org/project/services_search) **2 Resources** | **2 Requests**
-- [ ] [Services Entity](https://www.drupal.org/project/services_entity) **6 Resources** | **47 Requests**
+- [x] [Services](https://www.drupal.org/project/services) **7 Resources**
+- [x] [Services Views](https://www.drupal.org/project/services_view) **1 Resources**
+- [ ] [Services Menu](https://www.drupal.org/project/services_menu) **1 Resources**
+- [ ] [Services Search](https://www.drupal.org/project/services_search) **2 Resources**
+- [x] [Services Entity](https://www.drupal.org/project/services_entity) **5 Resources**
 
 - **Drupal Services**
   - Comment Resource
@@ -170,6 +170,14 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
 - **Drupal Services Views**
   - Views Resource
     - Retrieve
+
+- **Drupal Services Entity**
+  - Entity Resource
+    - Retrieve
+    - Create
+    - Update
+    - Delete
+    - Index
 
 - **Drupal Services Menu**
   - Menu Resource
