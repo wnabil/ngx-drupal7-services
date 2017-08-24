@@ -105,9 +105,9 @@ Your must implement your own application configuration for the DrupalConstants.S
 Here is a list of supported Drupal services 3.x modules "Others are still WIP":
 - [x] [Services](https://www.drupal.org/project/services) **7 Resources**
 - [x] [Services Views](https://www.drupal.org/project/services_view) **1 Resources**
-- [ ] [Services Menu](https://www.drupal.org/project/services_menu) **1 Resources**
-- [ ] [Services Search](https://www.drupal.org/project/services_search) **2 Resources**
 - [x] [Services Entity](https://www.drupal.org/project/services_entity) **5 Resources**
+- [ ] [Services Menu](https://www.drupal.org/project/services_menu) **1 Resources** //WIP
+- [ ] [Services Search](https://www.drupal.org/project/services_search) **2 Resources** //WIP
 
 - **Drupal Services**
   - Comment Resource
@@ -178,10 +178,6 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
     - Update
     - Delete
     - Index
-
-- **Drupal Services Menu**
-  - Menu Resource
-    - Retrieve
 
 ## Setup for Drupal
 - Start with a fresh Drupal7 installation.
