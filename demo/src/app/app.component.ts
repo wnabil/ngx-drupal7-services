@@ -37,6 +37,26 @@ export class AppComponent {
     });
   }
 
+  getVariable() {
+    this.systemService.getVariable("testvar").subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  setVariable() {
+    this.systemService.setVariable("testvar", {test: "myval"}).subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  delVariable() {
+    this.systemService.delVariable("testvar").subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  ////////////////////////////////////
+
   getUser() {
     this.userService.getUserById(1).subscribe(data => {
       console.log(data);

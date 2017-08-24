@@ -4,16 +4,11 @@
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
-
-/**
- * modules imports
- */
-import { Subscription } from 'rxjs/Rx';
-import { CookieModule } from 'ngx-cookie';
-
 /**
  * my imports
  */
+import { Subscription } from 'rxjs/Rx';
+import { CookieModule } from 'ngx-cookie';
 import { DrupalConstants } from './application/drupal-constants';
 import { MainService } from './main/main.service';
 import { SystemService } from './system/system.service';
@@ -25,7 +20,6 @@ import { TaxonomyTermService } from './taxonomy/taxonomy-term.service';
 import { TaxonomyVocabularyService } from './taxonomy/taxonomy-vocabulary.service';
 import { ViewService } from './view/view.service';
 import { EntityService } from './entity/entity.service';
-
 import { SystemConnection } from './models/system';
 
 /**
@@ -46,6 +40,9 @@ export function init(systemService: SystemService): () => Promise<SystemConnecti
 
 /**
  * main services module with providers
+ * if you do not need to import all the services you need to make your own module and import the required providers only
+ * ngx-cookie package is required
+ * @see https://www.npmjs.com/package/ngx-cookie
  */
 @NgModule({
   imports: [
@@ -76,7 +73,7 @@ export function init(systemService: SystemService): () => Promise<SystemConnecti
 export class Drupal7ServicesModule {}
 
 /**
- * export intrfaces
+ * export intrfaces and singleton
  */
 export * from './models';
 export { DrupalConstants };
@@ -96,3 +93,8 @@ export {
   ViewService,
   EntityService
 };
+
+/**
+ * My English is bad and i know that
+ * any comment enhancements are wellcome
+ */

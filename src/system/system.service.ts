@@ -35,18 +35,35 @@ export class SystemService extends MainService {
     });
   }
 
-  // TODO
-  get_variable(variableName) {
-    return;
+  /**
+   * implement get_variable resource
+   * @param variableName the name of the variable
+   * @return the value of the variable
+   */
+  getVariable(variableName: string): Observable<any[]> {
+    return this.post({name: variableName}, 'get_variable');
   }
 
-  // TODO
-  set_variable(variableName, value) {
-    return;
+  /**
+   * implement set_variable resource
+   * @param variableName the name of the variable
+   * @param value the value to set for the variable
+   * @return always null, take care of overriding old variables with same name
+   */
+  setVariable(variableName: string, value: any): Observable<null> {
+    const variable = {
+      name: variableName,
+      value: value
+    }
+    return this.post(variable, 'set_variable');
   }
 
-  // TODO
-  del_variable(variableName) {
-    return;
+  /**
+   * implement del_variable resource
+   * @param variableName variable name to delete
+   * @return null if variable found or not.
+   */
+  delVariable(variableName: string): Observable<null> {
+    return this.post({name: variableName}, 'del_variable');
   }
 }

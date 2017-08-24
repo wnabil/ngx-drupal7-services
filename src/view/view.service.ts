@@ -12,6 +12,12 @@ import { ViewOptions } from '../models/view';
 export class ViewService extends MainService {
   entityType = 'views';
 
+  /**
+   * impelemnt retrive resource
+   * @param viewMachineName view machine name
+   * @param options parameters of filteration for this view
+   * @return array of view rows OR view html code if the options format_output is 1
+   */
   getView(viewMachineName: string, options?: ViewOptions): Observable<any[]> {
     const args = this.getArgs(options);
     return this.get(viewMachineName + args);

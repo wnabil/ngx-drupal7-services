@@ -11,7 +11,7 @@ import { DrupalConstants } from '../application/drupal-constants';
 @Injectable()
 export class MainService {
   /**
-   * entity type of the current service, the main service dont have any thing but the other services must use it
+   * entity type of the current service, the main service dont have anything but the other services must use it
    * for example "node, comment, user, system"
    */
   protected readonly entityType: string;
@@ -43,6 +43,23 @@ export class MainService {
     return options;
   }
 
+  /**
+   * getting token from drupal services module
+   * @return http text token response
+   */
+  getToken(): Observable<string> {
+    return this.httpRequestWithConfig(
+      this.http.get(`${DrupalConstants.backEndUrl}services/session/token`, this.options), false
+    ).map(res => res.text());
+  }
+
+  /**
+   * Saving drupal session and token in cookies using ngx-cookie service
+   * @param sessid drupal sessionid
+   * @param session_name drupal session name
+   * @param timestamp the time of the last connection to check the expiration date
+   * @param token X-CSRF-Token from drupal services/session/token
+   */
   saveSession(sessid: string, session_name: string, timestamp: number, token?: string): void {
     if (token) {
       this.cookieService.put("token", token);
@@ -73,6 +90,7 @@ export class MainService {
 
   /**
    * adding http request configs: request timeout, error handler, json convert
+   * its a recursion method that will recall itself if the json convert is true
    * @param httpObservableRequest the http Observable to request
    * @param toJson to convert the response to json object
    * @return Observable of the request after adding required configs
@@ -131,15 +149,8 @@ export class MainService {
   }
 
   /**
-   * getting token from drupal services module
-   * @return http text token response
+   * Clearing drupal session after logging out
    */
-  protected getToken(): Observable<string> {
-    return this.httpRequestWithConfig(
-      this.http.get(`${DrupalConstants.backEndUrl}services/session/token`, this.options), false
-    ).map(res => res.text());
-  }
-
   protected removeSession(): void {
     this.cookieService.remove("token");
     this.cookieService.remove("sessid");
@@ -147,6 +158,10 @@ export class MainService {
     this.cookieService.remove("timestamp");
   }
 
+  /**
+   * Checking the current connection if the connection is init and valid
+   * @return if connection is valid
+   */
   protected isConnected(): boolean {
     return this.cookieService.get("token") &&
     this.cookieService.get("sessid") &&
@@ -155,12 +170,21 @@ export class MainService {
     true : false;
   }
 
+  /**
+   * Check if the drupal session is timedout.
+   * @return true if the current date is less than the login date by 24 day "drupal default session timeout is 24 day".
+   */
   protected isConnectionExpired(): boolean {
     const nowTS = Math.floor(Date.now());
-    const expirationTS = 1987200000;
-    return nowTS - +this.cookieService.get("timestamp") < expirationTS
+    const expirationTS = 1987200000; // 24 days
+    return nowTS - +this.cookieService.get("timestamp") < expirationTS;
   }
 
+  /**
+   * Serializin arguments as a string
+   * @param options object of drupal parametars to serialize
+   * @return string of parameters
+   */
   protected getArgs(options: Object): string {
     if (!options) {
       return '';
@@ -172,6 +196,12 @@ export class MainService {
     return args;
   }
 
+  /**
+   * serializing eatch option
+   * @param key option key
+   * @param value option value
+   * @return single option serilization
+   */
   protected optionToString(key: string, value: any): string {
     if (!value) {
       return '';
