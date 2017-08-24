@@ -1,5 +1,3 @@
-# Big thanks to [BioPhoton](https://github.com/BioPhoton) for giving me alot of ideas from his old [AngularJS services project](https://github.com/BioPhoton/ng-drupal-7-services)
-
 # Angular 2+/Ionic 2+ Drupal 7 Services
 #### Typescript angular module for [Drupal Services 3.x](https://www.drupal.org/project/services)
 
@@ -217,3 +215,5 @@ add_header Access-Control-Allow-Headers 'Origin, X-Requested-With, Content-Type,
 add_header Access-Control-Expose-Headers 'Authorization';
 add_header Access-Control-Allow-Methods 'POST,PUT,GET,DELETE,OPTIONS';
 ```
+
+# Big thanks to [BioPhoton](https://github.com/BioPhoton) for giving me alot of ideas from his old [AngularJS services project](https://github.com/BioPhoton/ng-drupal-7-services)
