@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {
   MainService, DrupalConstants, UserService, SystemService, NodeService, FileAttach, FileService,
   CommentService, TaxonomyTermService, TaxonomyVocabularyService, ViewService, ViewOptions, EntityService,
-  CustomEntityOptions
+  CustomEntityOptions, MenuService
 } from '../../../index';
 
 @Component({
@@ -28,6 +28,7 @@ export class AppComponent {
     private taxonomyVocabularyService: TaxonomyVocabularyService,
     private viewService: ViewService,
     private entityService: EntityService,
+    private menuService: MenuService
   ) {
   }
 
@@ -453,6 +454,14 @@ export class AppComponent {
       id: 4
     }
     this.entityService.updateEntity("potato", entity, 4).subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  //////////////////////////////////
+
+  menu() {
+    this.menuService.getMenu("main-menu").subscribe(data => {
       console.log(data);
     });
   }

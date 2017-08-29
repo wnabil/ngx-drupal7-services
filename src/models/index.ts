@@ -12,3 +12,4 @@ export { TaxonomyTerm } from './taxonomy-term';
 export { TaxonomyVocabulary, TaxonomyVocabularyTree } from './taxonomy-vocabulary';
 export { ViewOptions } from './view';
 export { CustomEntityOptions } from './custom-entity';
+export { Menu, MenuItem, MenuItemLink } from './menu';

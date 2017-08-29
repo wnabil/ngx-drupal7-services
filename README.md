@@ -14,7 +14,8 @@ Also supports Server Side Rendering "Angular Universal".
 
 ## DEMOS
 Check out the [Demo folder](https://github.com/wnabil/ngx-drupal7-services/tree/master/demo) for a full demo.
-Running the demo
+
+Running the demo:
 ```bash
 git clone git@github.com:wnabil/ngx-drupal7-services.git
 cd ngx-drupal7-services
@@ -104,7 +105,7 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
 - [x] [Services](https://www.drupal.org/project/services) **7 Resources**
 - [x] [Services Views](https://www.drupal.org/project/services_view) **1 Resources**
 - [x] [Services Entity](https://www.drupal.org/project/services_entity) **5 Resources**
-- [ ] [Services Menu](https://www.drupal.org/project/services_menu) **1 Resources** //WIP
+- [x] [Services Menu](https://www.drupal.org/project/services_menu) **1 Resources**
 - [ ] [Services Search](https://www.drupal.org/project/services_search) **2 Resources** //WIP
 
 - **Drupal Services**
@@ -133,9 +134,9 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
     - Attach_file
   - System Resource
     - Connect
-    - Get_variable // WIP
-    - Set_variable // WIP
-    - Del_variable // WIP
+    - Get_variable
+    - Set_variable
+    - Del_variable
   - TaxonomyTerm Resource
     - Retrieve
     - Create
