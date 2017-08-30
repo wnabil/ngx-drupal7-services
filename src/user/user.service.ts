@@ -77,7 +77,7 @@ export class UserService extends MainService {
    * @return new token after logging out
    */
   logout(): Observable<string> {
-    const observer = this.post('logout');
+    const observer = this.post({}, 'logout');
     return observer.flatMap((loggedOut: boolean[]) => {
       if (loggedOut[0]) {
         this.removeSession();
