@@ -43,7 +43,7 @@ export class NodeService extends MainService {
    * @param node node to create
    * @return created node details
    */
-  updateNode(node: NodeEntity): Observable<CreatedNode> {
+  updateNode(node: {nid: number}): Observable<CreatedNode> {
     return this.put(node, node.nid);
   }
 
