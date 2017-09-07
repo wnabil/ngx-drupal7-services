@@ -36,7 +36,7 @@ export class EntityService extends MainService {
    * @return array of the required entity type.
    * personally suggest to create an interface for each type you want to retrive, you can use the models in this module as a perent interfaces.
    */
-  indexEntity(entityMachineName: string, options?: CustomEntityOptions): Observable<Object[]> {
+  indexEntity(entityMachineName: string, options?: CustomEntityOptions): Observable<any[]> {
     const args = this.getArgs(options);
     return this.get(entityMachineName + args);
   }
@@ -48,7 +48,7 @@ export class EntityService extends MainService {
    * @param options parameter options
    * @return entity object
    */
-  retrieveEntity(entityMachineName: string, selector: number, options?: CustomEntityOptions): Observable<Object> {
+  retrieveEntity(entityMachineName: string, selector: number, options?: CustomEntityOptions): Observable<any> {
     const args = this.getArgs(options);
     return this.get(`${entityMachineName}/${selector}${args}`);
   }
@@ -69,7 +69,7 @@ export class EntityService extends MainService {
    * @param entity entity object to create
    * @return created entity
    */
-  createEntity(entityMachineName: string, entity: Object): Observable<Object> {
+  createEntity(entityMachineName: string, entity: Object): Observable<any> {
     return this.post(entity, entityMachineName);
   }
 
@@ -80,7 +80,7 @@ export class EntityService extends MainService {
    * @param selector entity id to update and must match the id inside the entity object
    * @return updated entity
    */
-  updateEntity(entityMachineName: string, entity: Object, selector: number): Observable<Object> {
+  updateEntity(entityMachineName: string, entity: any, selector: number): Observable<any> {
     return this.put(entity, `${entityMachineName}/${selector}`);
   }
 

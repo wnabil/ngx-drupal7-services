@@ -119,7 +119,7 @@ export class MainService {
    * @param body the contenct of the request
    * @return http json response
    */
-  protected post(body: Object = {}, resource?: string | number): Observable<any> {
+  protected post(body: any = {}, resource?: string | number): Observable<any> {
     return this.httpRequestWithConfig(
       this.http.post(this.fullRequestURL(resource), body, this.options),
     );
@@ -131,7 +131,7 @@ export class MainService {
    * @param body the contenct of the request
    * @return http json response
    */
-  protected put(body: Object = {}, resource?: string | number): Observable<any> {
+  protected put(body: any = {}, resource?: string | number): Observable<any> {
     return this.httpRequestWithConfig(
       this.http.put(this.fullRequestURL(resource), body, this.options),
     );
@@ -185,7 +185,7 @@ export class MainService {
    * @param options object of drupal parametars to serialize
    * @return string of parameters
    */
-  protected getArgs(options: Object): string {
+  protected getArgs(options: any): string {
     if (!options) {
       return '';
     }
