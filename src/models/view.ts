@@ -1,5 +1,5 @@
 export interface ViewOptions {
-  filters?: {[key: string]: string | number | boolean},
+  filters?: {[key: string]: any},
   display_id?: string,
   args?: Array<string | number | boolean>,
   offset?: number,
