@@ -213,11 +213,32 @@ export class MainService {
       });
     } else if (value instanceof Object) {
       Object.keys(value).forEach((element, index) => {
-        str += `${key}[${element}]=${value[element]}&`;
+        if (value instanceof Object) {
+          str += `${key}[${element}]${this.serializeObject(value[element])}`;
+        } else {
+          str += `${key}[${element}]=${value[element]}&`;
+        }
       });
     } else {
       str += `${key}=${value}&`;
     }
+    return str;
+  }
+
+  /**
+   * serializing the object keys
+   * @param obj object to serialize
+   */
+  private serializeObject(obj: any): string {
+    var str = '';
+    Object.keys(obj).forEach((key, index) => {
+      const value = obj[key];
+      if (value instanceof Object) {
+        str += `[${key}]${this.serializeObject(value)}`;
+      } else {
+        str += `[${key}]=${value}&`;
+      }
+    });
     return str;
   }
 }

@@ -410,11 +410,15 @@ export class AppComponent {
   getView() {
     const options: ViewOptions = {
       filters: {
-        title: 'p',
+        year: {
+          value: {
+            year: 2017
+          }
+        }
       }
     }
     this.viewService.getView("test", options).subscribe(data => {
-      console.log(data);
+      // console.log(data);
     });
   }
 
