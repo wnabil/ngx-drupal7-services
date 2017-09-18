@@ -151,4 +151,11 @@ export class UserService extends MainService {
     return this.post(`${uid}/resend_welcome_email`);
   }
 
+  /**
+   * implement token
+   */
+  token(): Observable<string> {
+    return this.getToken();
+  }
+
 }

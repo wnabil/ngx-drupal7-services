@@ -47,7 +47,7 @@ export class MainService {
    * getting token from drupal services module
    * @return http text token response
    */
-  getToken(): Observable<string> {
+  protected getToken(): Observable<string> {
     return this.httpRequestWithConfig(
       this.http.get(`${DrupalConstants.backEndUrl}services/session/token`, this.options), false
     ).map(res => res.text());

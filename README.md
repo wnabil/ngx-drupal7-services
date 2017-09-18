@@ -177,6 +177,10 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
     - Update
     - Delete
     - Index
+    
+- **Drupal Services Menu**
+  - Menus Resource
+    - Retrieve
 
 ## Setup for Drupal
 - Start with a fresh Drupal7 installation.
