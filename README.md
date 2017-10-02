@@ -212,7 +212,6 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
 
 `api/*|<mirror>|POST,PUT,GET,DELETE|Content-Type,X-CSRF-TOKEN|true`.
 
-
 `services/session/token|<mirror>|GET|Content-Type,X-CSRF-TOKEN|true`.
 
 # Big thanks to [BioPhoton](https://github.com/BioPhoton) for giving me alot of ideas from his old [AngularJS services project](https://github.com/BioPhoton/ng-drupal-7-services)
