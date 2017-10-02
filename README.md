@@ -210,15 +210,7 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
 - install [CORS](https://www.drupal.org/project/cors) 
 - Go to admin/config/services/cors  and paste following into the textarea   
 
-`api/*|<mirror>|POST,PUT,GET,DELETE|Content-Type,Authorization,X-CSRF-TOKEN|true`.
-
-### OR Configure your nginx
-```
-add_header Access-Control-Allow-Origin 'http://YOURAPPLICATIONURL';
-add_header Access-Control-Allow-Credentials true;
-add_header Access-Control-Allow-Headers 'Origin, X-Requested-With, Content-Type, Accept, Authorization, X-CSRF-Token, Cookie';
-add_header Access-Control-Expose-Headers 'Authorization';
-add_header Access-Control-Allow-Methods 'POST,PUT,GET,DELETE,OPTIONS';
-```
+`api/*|<mirror>|POST,PUT,GET,DELETE|Content-Type,X-CSRF-TOKEN|true`.
+`services/session/token|<mirror>|GET|Content-Type,X-CSRF-TOKEN|true`.
 
 # Big thanks to [BioPhoton](https://github.com/BioPhoton) for giving me alot of ideas from his old [AngularJS services project](https://github.com/BioPhoton/ng-drupal-7-services)
