@@ -5,4 +5,5 @@ export interface ViewOptions {
   offset?: number,
   limit?: number,
   format_output?: 0 | 1,
+  page?: number,
 }

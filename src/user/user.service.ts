@@ -158,4 +158,16 @@ export class UserService extends MainService {
     return this.getToken();
   }
 
+  /**
+   * Both the user and system services may set the session but we do not need to display this method on other services
+   * creating a parent method to call the protected method is a good solution.
+   * @param sessid
+   * @param session_name
+   * @param timestamp
+   * @param token
+   */
+  saveSession(sessid: string, session_name: string, timestamp: number, token?: string): void {
+    this.saveSessionToken(sessid, session_name, timestamp, token);
+  }
+
 }

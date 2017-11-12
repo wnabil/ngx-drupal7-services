@@ -60,7 +60,7 @@ export class MainService {
    * @param timestamp the time of the last connection to check the expiration date
    * @param token X-CSRF-Token from drupal services/session/token
    */
-  saveSession(sessid: string, session_name: string, timestamp: number, token?: string): void {
+  protected saveSessionToken(sessid: string, session_name: string, timestamp: number, token?: string): void {
     if (token) {
       this.cookieService.put("token", token);
     }
