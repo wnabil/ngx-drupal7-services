@@ -3,7 +3,7 @@
 
 [![npm version](https://badge.fury.io/js/ngx-drupal7-services.svg)](https://badge.fury.io/js/ngx-drupal7-services)  
 
-Angular Drupal 7 Services is a REST client for Angular 2+, which allows you to user predefined functions when communication with Drupal's api endpoints.  
+Angular Drupal 7 Services is a REST client for Angular 2+, which allows you to use predefined functions when communication with Drupal's api endpoints.  
 Unlike the other project focusing on the same topic, Angular Drupal 7 Services is precisely organized around the [Drupal Services 3.x](https://www.drupal.org/project/services) architecture and naming conventions.   
   
 It optionally provides events next to the common used observable approach.
@@ -72,7 +72,7 @@ export class AppModule {
 
 **(4)** Import the required service into your component and use the methods inside it
 ```javascript 
-import { UserService } from 'ngx-drupal7-services';
+import { UserService, DrupalConstants } from 'ngx-drupal7-services';
 
 @Component({
   selector: 'app-root',
@@ -87,7 +87,8 @@ export class AppComponent {
       username: username,
       password: password
     };
-    this.userService.login(user).subscribe(data => {
+    this.userService.login(user).subscribe(connection => {
+      DrupalConstants.Connection = connection; // make sure to save the connection after logging in.
       // re-direct to user pofile or show welcome message.
     });
   }

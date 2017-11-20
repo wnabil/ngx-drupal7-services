@@ -410,9 +410,10 @@ export class AppComponent {
   getView() {
     const options: ViewOptions = {
       filters: {
-        year: {
+        date: {
           value: {
-            year: 2017
+            year: 2017,
+            month: 2,
           }
         }
       }
