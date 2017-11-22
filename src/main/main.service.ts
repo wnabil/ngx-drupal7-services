@@ -54,7 +54,10 @@ export class MainService {
   protected getToken(): Observable<string> {
     return this.httpRequestWithConfig(
       this.http.get(`${DrupalConstants.backEndUrl}services/session/token`, this.options), false
-    ).map(res => {this.cookieService.put("token", res.text()); return res.text()});
+    ).map(res => {
+      this.cookieService.put("token", res.text());
+      return res.text()
+    });
   }
 
   /**
@@ -169,10 +172,10 @@ export class MainService {
    */
   protected isConnected(): boolean {
     return this.getSavedVariable('token') &&
-    this.getSavedVariable('sessid') &&
-    this.getSavedVariable('session_name') &&
-    !this.isConnectionExpired() ?
-    true : false;
+      this.getSavedVariable('sessid') &&
+      this.getSavedVariable('session_name') &&
+      !this.isConnectionExpired() ?
+      true : false;
   }
 
   /**
@@ -213,7 +216,7 @@ export class MainService {
     if (DrupalConstants.Connection) {
       if (DrupalConstants.Connection[variableName]) {
         return DrupalConstants.Connection[variableName];
-      }else if (DrupalConstants.Connection.user && DrupalConstants.Connection.user[variableName]) {
+      } else if (DrupalConstants.Connection.user && DrupalConstants.Connection.user[variableName]) {
         return DrupalConstants.Connection.user[variableName];
       }
     }
