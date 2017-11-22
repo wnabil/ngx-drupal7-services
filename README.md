@@ -99,7 +99,7 @@ export class AppComponent {
 
 ## Configuration
 Basically all configurable options are wrapped in an angular constant.
-Your must implement your own application configuration for the DrupalConstants.Settings as shown above.
+You must implement your own application configuration for the DrupalConstants.Settings as shown above.
 
 ## Supported Drupal Modules
 Here is a list of supported Drupal services 3.x modules "Others are still WIP":
@@ -205,7 +205,7 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
   - multipart/form-data (for some file upload resources)
 - Click Save. 
 - Flush all of Drupal's caches.
-- Some requests requires the user to have permission to to them, make sure you configured your user permissions to match the application requirements
+- Some requests requires the user to have permission to do them, make sure you configured your user permissions to match the application requirements
 
 ### Setup for CORS
 - install [CORS](https://www.drupal.org/project/cors) 
@@ -214,5 +214,3 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
 `api/*|<mirror>|POST,PUT,GET,DELETE|Content-Type,X-CSRF-TOKEN|true`.
 
 `services/session/token|<mirror>|GET|Content-Type,X-CSRF-TOKEN|true`.
-
-# Big thanks to [BioPhoton](https://github.com/BioPhoton) for giving me alot of ideas from his old [AngularJS services project](https://github.com/BioPhoton/ng-drupal-7-services)
