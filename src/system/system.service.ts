@@ -16,17 +16,29 @@ export class SystemService extends MainService {
 
   /**
    * if there is already a token in the browser cookies and it is not expired this will fetch a new token before trying to connect
+   * @param refreshToken boolean to force the application to request new token
    * @return observable of the connect method
    * the subscription data is an object of SystemConnection interface
    */
-  connect(): Observable<SystemConnection> {
+  connect(refreshToken: boolean = false): Observable<SystemConnection> {
 
     if (this.isConnectionExpired()) {
       this.removeSession();
     }
 
-    return this.getToken().flatMap(token => {
-      return this.post({}, "connect").map(connection => {connection.token = token; return connection});
+    if (!DrupalConstants.Connection || DrupalConstants.Connection.token || refreshToken) {
+      return this.getToken().flatMap(token => {
+        return this.post({}, "connect").map(connection => {
+          connection.token = token;
+          this.saveConnection(connection);
+          return connection;
+        });
+      });
+    }
+
+    return this.post({}, "connect").map(connection => {
+      this.saveConnection(connection);
+      return connection;
     });
   }
 

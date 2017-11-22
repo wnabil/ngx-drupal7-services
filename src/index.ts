@@ -30,10 +30,7 @@ import { SystemConnection } from './models/system';
  */
 export function init(systemService: SystemService): () => Promise<SystemConnection> {
   return () => {
-    const connectionObservable = systemService.connect().toPromise();
-    connectionObservable.then(connection => {
-      systemService.saveConnection(connection);
-    });
+    const connectionObservable = systemService.connect(true).toPromise();
     return connectionObservable;
   };
 }

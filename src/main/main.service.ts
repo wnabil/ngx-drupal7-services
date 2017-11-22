@@ -71,6 +71,7 @@ export class MainService {
     } else {
       DrupalConstants.Connection.token = this.getSavedVariable('token');
     }
+    this.cookieService.put(connection.session_name, connection.sessid, {httpOnly: true});
     this.cookieService.put("sessid", connection.sessid);
     this.cookieService.put("session_name", connection.session_name);
     this.cookieService.put("timestamp", connection.user.timestamp.toString());
@@ -163,7 +164,11 @@ export class MainService {
     this.cookieService.remove("sessid");
     this.cookieService.remove("session_name");
     this.cookieService.remove("timestamp");
-    delete DrupalConstants.Connection;
+    delete DrupalConstants.Connection.token;
+    delete DrupalConstants.Connection.sessid;
+    delete DrupalConstants.Connection.session_name;
+    delete DrupalConstants.Connection.user.timestamp;
+    DrupalConstants.Connection.user.uid = 0;
   }
 
   /**
