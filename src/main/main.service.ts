@@ -65,16 +65,16 @@ export class MainService {
    * @param connection drupal connection
    */
   protected saveSessionToken(connection: SystemConnection): void {
-    DrupalConstants.Connection = connection;
-    if (connection.token) {
-      this.cookieService.put("token", connection.token);
-    } else {
-      DrupalConstants.Connection.token = this.getSavedVariable('token');
+    if (!connection.token) {
+      connection.token = this.getSavedVariable('token');
     }
+    this.removeSession();
+    DrupalConstants.Connection = connection;
     this.cookieService.put(connection.session_name, connection.sessid, {httpOnly: true});
     this.cookieService.put("sessid", connection.sessid);
     this.cookieService.put("session_name", connection.session_name);
     this.cookieService.put("timestamp", connection.user.timestamp.toString());
+    this.cookieService.put("token", connection.token);
   }
 
   /**
@@ -160,15 +160,7 @@ export class MainService {
    * Clearing drupal session after logging out
    */
   protected removeSession(): void {
-    this.cookieService.remove("token");
-    this.cookieService.remove("sessid");
-    this.cookieService.remove("session_name");
-    this.cookieService.remove("timestamp");
-    delete DrupalConstants.Connection.token;
-    delete DrupalConstants.Connection.sessid;
-    delete DrupalConstants.Connection.session_name;
-    delete DrupalConstants.Connection.user.timestamp;
-    DrupalConstants.Connection.user.uid = 0;
+    this.cookieService.removeAll();
   }
 
   /**

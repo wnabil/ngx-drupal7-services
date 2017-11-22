@@ -220,3 +220,10 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
   - System service/user service: saving the connection after logging in and system connect resource.
   - Adding support for adding Cookie header in drupal constants settings object.
   - drupal connection now will be retrived from the DrupalConstant singleton first, otherwhise we will get them from        cookies "usefull for making multiple authintications and changing them dinamically during the runtime".
+
+- **1.1.0**
+  - Upgrade to angular 5
+
+- **1.1.1**
+  - Fix logging out not clearing all data
+  - Use set httponly for cookie header
