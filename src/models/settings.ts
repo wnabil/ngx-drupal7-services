@@ -5,4 +5,5 @@ export interface Settings {
   apiEndPoint: string,
   language: string,
   requestTimeout: number,
+  cookieHeader?: boolean,
 }

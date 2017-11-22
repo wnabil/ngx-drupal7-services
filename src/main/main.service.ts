@@ -35,6 +35,9 @@ export class MainService {
   get options(): RequestOptionsArgs {
     const headers = new Headers();
     headers.set('X-CSRF-Token', this.cookieService.get('token'));
+    if (DrupalConstants.Settings.cookieHeader) {
+      headers.set('Cookie', `${this.cookieService.get('session_name')}=${this.cookieService.get('sessid')}`);
+    }
     headers.set('Content-Type', 'application/json');
     headers.set('Accept', 'application/json');
     const options: RequestOptionsArgs = new RequestOptions();
