@@ -37,7 +37,7 @@
     "protractor": "~5.2.0",
     "ts-node": "~3.3.0",
     "tslint": "~5.8.0",
-    "typescript": "~2.6.1"
+    "typescript": "^2.4.2"
   },
   "description": "# Angular 2+/Ionic 2+ Drupal 7 Services #### Typescript angular module for [Drupal Services 3.x](https://www.drupal.org/project/services)",
   "main": "lib/index.js",
