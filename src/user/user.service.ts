@@ -67,7 +67,7 @@ export class UserService extends MainService {
   login(user: LoginCredentials): Observable<SystemConnection> {
     const observer = this.post(user, 'login');
     return observer.map((connection: SystemConnection) => {
-      this.saveSession(connection.sessid, connection.session_name, connection.user.login, connection.token);
+      this.saveConnection(connection);
       return connection;
     });
   }
@@ -161,13 +161,13 @@ export class UserService extends MainService {
   /**
    * Both the user and system services may set the session but we do not need to display this method on other services
    * creating a parent method to call the protected method is a good solution.
-   * @param sessid
-   * @param session_name
-   * @param timestamp
-   * @param token
+   * @param connection drupal user connection object
    */
-  saveSession(sessid: string, session_name: string, timestamp: number, token?: string): void {
-    this.saveSessionToken(sessid, session_name, timestamp, token);
+  saveConnection(connection: SystemConnection): void {
+    if (!connection.user.timestamp) {
+      connection.user.timestamp = Math.floor(Date.now());
+    }
+    this.saveSessionToken(connection);
   }
 
 }

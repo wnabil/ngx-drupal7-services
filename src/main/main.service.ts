@@ -3,6 +3,7 @@ import { Headers, Http, RequestOptions, RequestOptionsArgs } from '@angular/http
 import { CookieService } from 'ngx-cookie';
 import { Observable } from 'rxjs/Rx';
 import { DrupalConstants } from '../application/drupal-constants';
+import { SystemConnection } from '../models/system';
 
 /**
  * the main service is the basic http service of all other services "parent" that implements all the required request.
@@ -23,7 +24,7 @@ export class MainService {
    * @see https://angular.io/guide/dependency-injection
    * @see https://www.npmjs.com/package/ngx-cookie
    */
-  constructor(protected http: Http, public cookieService: CookieService) { }
+  constructor(protected http: Http, private cookieService: CookieService) { }
 
   /**
    * a getter to return the required headers for drupal
@@ -34,9 +35,9 @@ export class MainService {
    */
   get options(): RequestOptionsArgs {
     const headers = new Headers();
-    headers.set('X-CSRF-Token', this.cookieService.get('token'));
+    headers.set('X-CSRF-Token', this.getSavedVariable('token'));
     if (DrupalConstants.Settings.cookieHeader) {
-      headers.set('Cookie', `${this.cookieService.get('session_name')}=${this.cookieService.get('sessid')}`);
+      headers.set('Cookie', `${this.getSavedVariable('session_name')}=${this.getSavedVariable('sessid')}`);
     }
     headers.set('Content-Type', 'application/json');
     headers.set('Accept', 'application/json');
@@ -53,23 +54,23 @@ export class MainService {
   protected getToken(): Observable<string> {
     return this.httpRequestWithConfig(
       this.http.get(`${DrupalConstants.backEndUrl}services/session/token`, this.options), false
-    ).map(res => res.text());
+    ).map(res => {this.cookieService.put("token", res.text()); return res.text()});
   }
 
   /**
    * Saving drupal session and token in cookies using ngx-cookie service
-   * @param sessid drupal sessionid
-   * @param session_name drupal session name
-   * @param timestamp the time of the last connection to check the expiration date
-   * @param token X-CSRF-Token from drupal services/session/token
+   * @param connection drupal connection
    */
-  protected saveSessionToken(sessid: string, session_name: string, timestamp: number, token?: string): void {
-    if (token) {
-      this.cookieService.put("token", token);
+  protected saveSessionToken(connection: SystemConnection): void {
+    DrupalConstants.Connection = connection;
+    if (connection.token) {
+      this.cookieService.put("token", connection.token);
+    } else {
+      DrupalConstants.Connection.token = this.getSavedVariable('token');
     }
-    this.cookieService.put("sessid", sessid);
-    this.cookieService.put("session_name", session_name);
-    this.cookieService.put("timestamp", timestamp.toString());
+    this.cookieService.put("sessid", connection.sessid);
+    this.cookieService.put("session_name", connection.session_name);
+    this.cookieService.put("timestamp", connection.user.timestamp.toString());
   }
 
   /**
@@ -159,6 +160,7 @@ export class MainService {
     this.cookieService.remove("sessid");
     this.cookieService.remove("session_name");
     this.cookieService.remove("timestamp");
+    delete DrupalConstants.Connection;
   }
 
   /**
@@ -166,9 +168,9 @@ export class MainService {
    * @return if connection is valid
    */
   protected isConnected(): boolean {
-    return this.cookieService.get("token") &&
-    this.cookieService.get("sessid") &&
-    this.cookieService.get("session_name") &&
+    return this.getSavedVariable('token') &&
+    this.getSavedVariable('sessid') &&
+    this.getSavedVariable('session_name') &&
     !this.isConnectionExpired() ?
     true : false;
   }
@@ -180,7 +182,7 @@ export class MainService {
   protected isConnectionExpired(): boolean {
     const nowTS = Math.floor(Date.now());
     const expirationTS = 1987200000; // 24 days
-    return nowTS - +this.cookieService.get("timestamp") < expirationTS;
+    return nowTS - +this.getSavedVariable('timestamp') < expirationTS;
   }
 
   /**
@@ -197,6 +199,26 @@ export class MainService {
       args += this.optionToString(key, options[key]);
     });
     return args;
+  }
+
+  /**
+   * retrive the variable from the connection object or if there is no connection yet it will return them from the cookies
+   * this will will allow you to implement your custom connection storage, just like ionic.
+   * because the cookies is not always available on webview apps, you may need to save the connection in sqllite
+   * and restore them directly.
+   * @param variableName the name of the saved variable
+   */
+  private getSavedVariable(variableName: string): string {
+
+    if (DrupalConstants.Connection) {
+      if (DrupalConstants.Connection[variableName]) {
+        return DrupalConstants.Connection[variableName];
+      }else if (DrupalConstants.Connection.user && DrupalConstants.Connection.user[variableName]) {
+        return DrupalConstants.Connection.user[variableName];
+      }
+    }
+
+    return this.cookieService.get(variableName);
   }
 
   /**
@@ -244,4 +266,5 @@ export class MainService {
     });
     return str;
   }
+
 }

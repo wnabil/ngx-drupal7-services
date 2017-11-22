@@ -72,7 +72,7 @@ export class AppModule {
 
 **(4)** Import the required service into your component and use the methods inside it
 ```javascript 
-import { UserService, DrupalConstants } from 'ngx-drupal7-services';
+import { UserService } from 'ngx-drupal7-services';
 
 @Component({
   selector: 'app-root',
@@ -88,7 +88,6 @@ export class AppComponent {
       password: password
     };
     this.userService.login(user).subscribe(connection => {
-      DrupalConstants.Connection = connection; // make sure to save the connection after logging in.
       // re-direct to user pofile or show welcome message.
     });
   }
@@ -214,3 +213,10 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
 `api/*|<mirror>|POST,PUT,GET,DELETE|Content-Type,X-CSRF-TOKEN|true`.
 
 `services/session/token|<mirror>|GET|Content-Type,X-CSRF-TOKEN|true`.
+
+### Change Logs
+- **1.0.2**
+  - Adding change logs to readme file.
+  - System service/user service: saving the connection after logging in and system connect resource.
+  - Adding support for adding Cookie header in drupal constants settings object.
+  - drupal connection now will be retrived from the DrupalConstant singleton first, otherwhise we will get them from        cookies "usefull for making multiple authintications and changing them dinamically during the runtime".

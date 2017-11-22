@@ -17,21 +17,16 @@ export class SystemService extends MainService {
   /**
    * if there is already a token in the browser cookies and it is not expired this will fetch a new token before trying to connect
    * @return observable of the connect method
-   * the subscription data is an object of System interface
+   * the subscription data is an object of SystemConnection interface
    */
   connect(): Observable<SystemConnection> {
-    if (DrupalConstants.Connection) {
-      return Observable.of(DrupalConstants.Connection);
-    }
 
     if (this.isConnectionExpired()) {
       this.removeSession();
     }
 
-    this.cookieService.remove("token");
     return this.getToken().flatMap(token => {
-      this.cookieService.put("token", token);
-      return this.post({}, "connect");
+      return this.post({}, "connect").map(connection => {connection.token = token; return connection});
     });
   }
 
@@ -70,12 +65,12 @@ export class SystemService extends MainService {
   /**
    * Both the user and system services may set the session but we do not need to display this method on other services
    * creating a parent method to call the protected method is a good solution.
-   * @param sessid
-   * @param session_name
-   * @param timestamp
-   * @param token
+   * @param connection the drupal user connection object
    */
-  saveSession(sessid: string, session_name: string, timestamp: number, token?: string): void {
-    this.saveSessionToken(sessid, session_name, timestamp, token);
+  saveConnection(connection: SystemConnection): void {
+    if (!connection.user.timestamp) {
+      connection.user.timestamp = Math.floor(Date.now());
+    }
+    this.saveSessionToken(connection);
   }
 }

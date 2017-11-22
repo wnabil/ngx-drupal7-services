@@ -1,6 +1,6 @@
 {
   "name": "ngx-drupal7-services",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "MIT",
   "scripts": {
     "build": "rm -rf lib && ngc && npm run clean",
@@ -52,7 +52,9 @@
     "typescript",
     "ng",
     "ngx",
-    "drupal"
+    "drupal",
+    "ionic",
+    "cordova"
   ],
   "author": "Wassem Nabil <w.nabil@orangestudio.com> (http://arabianlolers.com)",
   "bugs": {
