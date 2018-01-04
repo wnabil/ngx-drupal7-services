@@ -24,18 +24,6 @@ import { MenuService } from './menu/menu.service';
 import { SystemConnection } from './models/system';
 
 /**
- * implement APP_INITIALIZER
- * @param systemService system service to connect
- * @see https://gillespie59.github.io/2016/12/04/angular2-code-before-rendering.html
- */
-export function init(systemService: SystemService): () => Promise<SystemConnection> {
-  return () => {
-    const connectionObservable = systemService.connect(true).toPromise();
-    return connectionObservable;
-  };
-}
-
-/**
  * main services module with providers
  * if you do not need to import all the services you need to make your own module and import the required providers only
  * ngx-cookie package is required
@@ -49,12 +37,6 @@ export function init(systemService: SystemService): () => Promise<SystemConnecti
   ],
   declarations: [],
   providers: [
-    {
-      'provide': APP_INITIALIZER,
-      'useFactory': init,
-      'deps': [SystemService],
-      'multi': true
-    },
     MainService,
     SystemService,
     UserService,
