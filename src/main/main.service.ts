@@ -27,6 +27,70 @@ export class MainService {
   constructor(protected http: Http, private cookieService: CookieService) { }
 
   /**
+   * structure a full entity for drupal request
+   * @param entity the entity to be structured
+   * @param ignoredFields fields to be ignored just like nid or uid or title
+   * @param language language of the entity
+   */
+  structureEntity(entity: any, ignoredFields: string[], language?: string): any {
+    Object.keys(entity).forEach((key: string, index: number) => {
+      if (ignoredFields.indexOf(key) === -1) {
+        entity[key] = this.structureField(entity[key], key, language);
+      }
+    });
+    return entity;
+  }
+
+  /**
+   * structure the field for drupal services request
+   * @param value the field value
+   * @param label field name
+   * @param language language of the field
+   */
+  structureField(value: any, label: string = "value", language?: string) {
+    if (!language) {
+      language = DrupalConstants.Settings.language;
+    }
+    const item = {};
+    if (this.isArray(value)) {
+      const field_array = [];
+      for (var i = 0, l = value.length; i < l; i++) {
+        item[label] = value[i];
+        field_array.push(item);
+      }
+      return {
+        [language]: field_array
+      };
+    }
+    if (value instanceof Date) {
+      const obj = {
+        value: {
+          date: `${value.getFullYear()}-${value.getMonth() + 1}-${value.getDate()} ${value.getHours()}:${value.getMinutes()}:${value.getSeconds()}`
+        }
+      };
+      return {
+        [language]: [
+          obj
+        ]
+      };
+    }
+    // field value given with label(s) already built
+    if (typeof value == "object") {
+      return {
+        [language]: [
+          value
+        ]
+      }
+    }
+    item[label] = value;
+    return {
+      [language]: [
+        item
+      ]
+    };
+  }
+
+  /**
    * a getter to return the required headers for drupal
    * X-CSRF-Token - application token from services/session/connect
    * Content-Type - the type of the request content.
@@ -107,7 +171,7 @@ export class MainService {
     if (toJson) {
       return this.httpRequestWithConfig(httpObservableRequest, false).map(res => res.json());
     }
-    return httpObservableRequest.timeout(DrupalConstants.Settings.requestTimeout).catch(err => Observable.throw(err));
+    return httpObservableRequest.timeout(DrupalConstants.Settings.requestTimeout).catch(err => DrupalConstants.Instance.handleOffline(err));
   }
 
   /**
@@ -199,6 +263,14 @@ export class MainService {
       args += this.optionToString(key, options[key]);
     });
     return args;
+  }
+
+  /**
+   * Check if variable is array of objects
+   * @param value array to check
+   */
+  private isArray(value) {
+    return Object.prototype.toString.call(value) === '[object Array]';
   }
 
   /**

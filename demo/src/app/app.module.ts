@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 
 import { Drupal7ServicesModule, DrupalConstants, Settings } from '../../../index';
 
+import { Observable } from 'rxjs/Rx';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -24,7 +26,20 @@ export class AppModule {
       apiProtocol: 'http',
       language: 'und',
       requestTimeout: 5000,
+      allowOffline: true,
     };
     DrupalConstants.Settings = drupalSettings;
+    // OPTIONAL
+    DrupalConstants.Instance.handleOffline = this.customHandle;
+  }
+
+  /**
+   * OPTIONAL
+   * custom http offline handler
+   * you can add sweet alert message for example
+   */
+  customHandle() {
+    alert("custom offline handler! you are offline");
+    return Observable.of();
   }
 }

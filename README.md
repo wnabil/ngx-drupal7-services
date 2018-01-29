@@ -64,8 +64,22 @@ export class AppModule {
       apiProtocol: 'http',
       language: 'und',
       requestTimeout: 5000,
+      allowOffline: true // optional
     };
     DrupalConstants.Settings = drupalSettings;
+    // OPTIONAL
+    DrupalConstants.Instance.handleOffline = this.customHandle;
+  }
+
+  /**
+   * OPTIONAL
+   * custom http offline handler
+   * you can add sweet alert message for example
+   * Note that you always must return an Observable
+   */
+  customHandle() {
+    alert("custom offline handler! you are offline");
+    return Observable.of();
   }
 }
 ```
@@ -227,3 +241,7 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
 - **1.1.1**
   - Fix logging out not clearing all data
   - Use set httponly for cookie header
+
+- **1.2.1**
+  - Fixes #1 - Add support for offline browsing
+  - Add entity and field structure support for drupal fields

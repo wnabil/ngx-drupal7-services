@@ -6,4 +6,5 @@ export interface Settings {
   language: string,
   requestTimeout: number,
   cookieHeader?: boolean,
+  allowOffline?: boolean,
 }

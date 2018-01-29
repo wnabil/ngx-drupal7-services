@@ -1,4 +1,5 @@
 import { Settings, SystemConnection } from '../models';
+import { Observable } from 'rxjs/Rx';
 
 /**
  * DrupalConstants singleton design pattern of the required settings and user connection.
@@ -17,6 +18,17 @@ export class DrupalConstants {
   private connection: SystemConnection;
 
   constructor() { }
+
+  /**
+   * handle offline error messages
+   * @param err (optional) the error of the http request
+   */
+  public handleOffline = function (err?: any): Observable<any> {
+    if (this.settings.allowOffline) {
+      return Observable.of();
+    }
+    return Observable.throw(err);
+  }
 
   static get Instance() {
     if (!this.instance) {

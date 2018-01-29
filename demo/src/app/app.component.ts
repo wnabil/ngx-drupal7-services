@@ -266,14 +266,17 @@ export class AppComponent {
   }
 
   createComment() {
-    const comment = {
+    // example of structuring the full entity
+    let comment = {
       nid: 2,
       subject: 'awdwadwadda',
-      comment_body: {und: [{value: 'adwdwaadw'}]}
+      comment_body: { value: 'adwdwaadw'},
     };
+    const ignoreFields = ["nid", "subject"];
+    comment = this.commentService.structureEntity(comment, ignoreFields);
     this.commentService.createComment(comment).subscribe(data => {
       console.log(data);
-    })
+    });
   }
 
   updateComment() {
@@ -281,7 +284,7 @@ export class AppComponent {
       cid: 4,
       nid: 2,
       subject: 'eeeeee',
-      comment_body: {und: [{value: 'adwdwwwwwwwaadw'}]}
+      comment_body: this.commentService.structureField('adwdwwwwwwwaadw', 'value'), // example of field structure
     };
     this.commentService.updateComment(comment).subscribe(data => {
       console.log(data);
