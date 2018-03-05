@@ -245,3 +245,6 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
 - **1.2.1**
   - Fixes #1 - Add support for offline browsing
   - Add entity and field structure support for drupal fields
+
+- **1.2.2**
+  - Add support for view args of type array
