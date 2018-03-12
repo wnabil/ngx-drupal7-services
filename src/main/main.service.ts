@@ -244,8 +244,13 @@ export class MainService {
    * @return true if the current date is less than the login date by 24 day "drupal default session timeout is 24 day".
    */
   protected isConnectionExpired(): boolean {
-    const nowTS = Math.floor(Date.now());
-    const expirationTS = 1987200000; // 24 days
+    const nowTS: number = Math.floor(Date.now());
+    var sessionDays: number = 23;
+    if (DrupalConstants.Settings.sessionDays) {
+      sessionDays = DrupalConstants.Settings.sessionDays;
+    }
+    const dayMS: number = 86400000; // 1 day to ms
+    const expirationTS: number = sessionDays * dayMS;
     return nowTS - +this.getSavedVariable('timestamp') < expirationTS;
   }
 

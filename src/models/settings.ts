@@ -7,4 +7,5 @@ export interface Settings {
   requestTimeout: number,
   cookieHeader?: boolean,
   allowOffline?: boolean,
+  sessionDays?: number,
 }

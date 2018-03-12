@@ -27,6 +27,7 @@ export class AppModule {
       language: 'und',
       requestTimeout: 5000,
       allowOffline: true,
+      sessionDays: 90,
     };
     DrupalConstants.Settings = drupalSettings;
     // OPTIONAL

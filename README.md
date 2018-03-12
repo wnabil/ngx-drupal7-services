@@ -248,3 +248,6 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
 
 - **1.2.2**
   - Add support for view args of type array
+
+- **1.2.3**
+  - Add new sessionDays option to support dynamic session expiration
