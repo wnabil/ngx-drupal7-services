@@ -412,6 +412,7 @@ export class AppComponent {
 
   getView() {
     const options: ViewOptions = {
+      display_id: 'service_1',
       filters: {
         date: {
           value: {

@@ -251,3 +251,6 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
 
 - **1.2.3**
   - Add new sessionDays option to support dynamic session expiration
+
+- **1.2.4**
+  - Change views display_id property to required
