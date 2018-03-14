@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {
   MainService, DrupalConstants, UserService, SystemService, NodeService, FileAttach, FileService,
   CommentService, TaxonomyTermService, TaxonomyVocabularyService, ViewService, ViewOptions, EntityService,
-  CustomEntityOptions, MenuService
+  CustomEntityOptions, MenuService, FacebookOAuthService
 } from '../../../index';
 
 @Component({
@@ -28,7 +28,8 @@ export class AppComponent {
     private taxonomyVocabularyService: TaxonomyVocabularyService,
     private viewService: ViewService,
     private entityService: EntityService,
-    private menuService: MenuService
+    private menuService: MenuService,
+    private facebookOAuthService: FacebookOAuthService
   ) {
   }
 
@@ -471,6 +472,15 @@ export class AppComponent {
 
   menu() {
     this.menuService.getMenu("main-menu").subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  ////////////////////////////////////
+
+  fbOAuthConnect() {
+    const accessToken = "mytoken";
+    this.facebookOAuthService.connect(accessToken).subscribe(data => {
       console.log(data);
     });
   }

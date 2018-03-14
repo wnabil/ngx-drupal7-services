@@ -120,7 +120,8 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
 - [x] [Services Views](https://www.drupal.org/project/services_view) **1 Resources**
 - [x] [Services Entity](https://www.drupal.org/project/services_entity) **5 Resources**
 - [x] [Services Menu](https://www.drupal.org/project/services_menu) **1 Resources**
-- [ ] [Services Search](https://www.drupal.org/project/services_search) **2 Resources** //WIP
+- [x] [Services FBOauth](https://www.drupal.org/project/services_fboauth) **1 Resources**
+- [ ] [Services Search](https://www.drupal.org/project/services_search) **2 Resources** // create an issue please if you want this to be implemented "PR welcome".
 
 - **Drupal Services**
   - Comment Resource
@@ -196,6 +197,10 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
   - Menus Resource
     - Retrieve
 
+- **Drupal Services FBOauth**
+  - Menus Resource
+    - Connect
+
 ## Setup for Drupal
 - Start with a fresh Drupal7 installation.
 
@@ -254,3 +259,6 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
 
 - **1.2.4**
   - Change views display_id property to required
+
+- **1.3.0**
+  - Add support for services fboauth module

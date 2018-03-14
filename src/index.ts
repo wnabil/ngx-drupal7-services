@@ -22,6 +22,7 @@ import { ViewService } from './view/view.service';
 import { EntityService } from './entity/entity.service';
 import { MenuService } from './menu/menu.service';
 import { SystemConnection } from './models/system';
+import { FacebookOAuthService } from './fboauth/fboauth.service'
 
 /**
  * implement APP_INITIALIZER
@@ -65,7 +66,8 @@ export function init(systemService: SystemService): () => Promise<SystemConnecti
     TaxonomyVocabularyService,
     ViewService,
     EntityService,
-    MenuService
+    MenuService,
+    FacebookOAuthService
   ],
 })
 export class Drupal7ServicesModule {}
@@ -90,7 +92,8 @@ export {
   TaxonomyVocabularyService,
   ViewService,
   EntityService,
-  MenuService
+  MenuService,
+  FacebookOAuthService
 };
 
 /**
