@@ -262,3 +262,6 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
 
 - **1.3.0**
   - Add support for services fboauth module
+
+- **1.4.0**
+  - Upgrade to use the new HttpClient :smirk:

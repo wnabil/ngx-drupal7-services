@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, RequestOptions, RequestOptionsArgs } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie';
 import { Observable } from 'rxjs/Rx';
 import { DrupalConstants } from '../application/drupal-constants';
@@ -24,7 +24,7 @@ export class MainService {
    * @see https://angular.io/guide/dependency-injection
    * @see https://www.npmjs.com/package/ngx-cookie
    */
-  constructor(protected http: Http, private cookieService: CookieService) { }
+  constructor(protected httpClient: HttpClient, private cookieService: CookieService) { }
 
   /**
    * structure a full entity for drupal request
@@ -97,17 +97,23 @@ export class MainService {
    * Accept - forcing drupal to return the response as a json object
    * @return object of the headers
    */
-  get options(): RequestOptionsArgs {
-    const headers = new Headers();
-    headers.set('X-CSRF-Token', this.getSavedVariable('token'));
-    if (DrupalConstants.Settings.cookieHeader) {
-      headers.set('Cookie', `${this.getSavedVariable('session_name')}=${this.getSavedVariable('sessid')}`);
+  get options(): any {
+    const headers = {
+      'Content-Type': 'application/json',
+      "Accept": 'application/json',
+    };
+    const token = this.getSavedVariable('token');
+    if (token) {
+      headers['X-CSRF-Token'] = token;
     }
-    headers.set('Content-Type', 'application/json');
-    headers.set('Accept', 'application/json');
-    const options: RequestOptionsArgs = new RequestOptions();
-    options.headers = headers;
-    options.withCredentials = true;
+    if (DrupalConstants.Settings.cookieHeader) {
+      headers['Cookie'] = `${this.getSavedVariable('session_name')}=${this.getSavedVariable('sessid')}`;
+    }
+    const options = {
+      headers: headers,
+      withCredentials: true,
+      reportProgress: true,
+    };
     return options;
   }
 
@@ -116,11 +122,13 @@ export class MainService {
    * @return http text token response
    */
   protected getToken(): Observable<string> {
+    const options = this.options;
+    options['responseType'] = 'text';
     return this.httpRequestWithConfig(
-      this.http.get(`${DrupalConstants.backEndUrl}services/session/token`, this.options), false
+      this.httpClient.get(`${DrupalConstants.backEndUrl}services/session/token`, options), false
     ).map(res => {
-      this.cookieService.put("token", res.text());
-      return res.text()
+      this.cookieService.put("token", res);
+      return res
     });
   }
 
@@ -169,7 +177,7 @@ export class MainService {
    */
   protected httpRequestWithConfig(httpObservableRequest: Observable<any>, toJson: boolean = true): Observable<any> {
     if (toJson) {
-      return this.httpRequestWithConfig(httpObservableRequest, false).map(res => res.json());
+      return this.httpRequestWithConfig(httpObservableRequest, false);
     }
     return httpObservableRequest.timeout(DrupalConstants.Settings.requestTimeout).catch(err => DrupalConstants.Instance.handleOffline(err));
   }
@@ -181,7 +189,7 @@ export class MainService {
    */
   protected get(resource?: string | number): Observable<any> {
     return this.httpRequestWithConfig(
-      this.http.get(this.fullRequestURL(resource), this.options)
+      this.httpClient.get(this.fullRequestURL(resource), this.options)
     );
   }
 
@@ -193,7 +201,7 @@ export class MainService {
    */
   protected post(body: any = {}, resource?: string | number): Observable<any> {
     return this.httpRequestWithConfig(
-      this.http.post(this.fullRequestURL(resource), body, this.options),
+      this.httpClient.post(this.fullRequestURL(resource), body, this.options),
     );
   }
 
@@ -205,7 +213,7 @@ export class MainService {
    */
   protected put(body: any = {}, resource?: string | number): Observable<any> {
     return this.httpRequestWithConfig(
-      this.http.put(this.fullRequestURL(resource), body, this.options),
+      this.httpClient.put(this.fullRequestURL(resource), body, this.options),
     );
   }
 
@@ -216,7 +224,7 @@ export class MainService {
    */
   protected delete(resource?: string | number): Observable<any> {
     return this.httpRequestWithConfig(
-      this.http.delete(this.fullRequestURL(resource), this.options),
+      this.httpClient.delete(this.fullRequestURL(resource), this.options),
     );
   }
 

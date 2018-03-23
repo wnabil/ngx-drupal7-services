@@ -3,7 +3,7 @@
  */
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 /**
  * my imports
  */
@@ -45,17 +45,11 @@ export function init(systemService: SystemService): () => Promise<SystemConnecti
 @NgModule({
   imports: [
     CommonModule,
-    HttpModule,
+    HttpClientModule,
     CookieModule.forRoot(),
   ],
   declarations: [],
   providers: [
-    {
-      'provide': APP_INITIALIZER,
-      'useFactory': init,
-      'deps': [SystemService],
-      'multi': true
-    },
     MainService,
     SystemService,
     UserService,
@@ -67,7 +61,13 @@ export function init(systemService: SystemService): () => Promise<SystemConnecti
     ViewService,
     EntityService,
     MenuService,
-    FacebookOAuthService
+    FacebookOAuthService,
+    {
+      'provide': APP_INITIALIZER,
+      'useFactory': init,
+      'deps': [SystemService],
+      'multi': true
+    }
   ],
 })
 export class Drupal7ServicesModule {}
