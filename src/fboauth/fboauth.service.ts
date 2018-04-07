@@ -33,10 +33,12 @@ export class FacebookOAuthService extends MainService {
 
     if (!DrupalConstants.Connection || DrupalConstants.Connection.token) {
       return this.getToken().flatMap(token => {
-        return this.post(body, "connect").map(connection => {
-          connection.token = token;
-          this.saveConnection(connection);
-          return connection;
+        return this.post(body, "connect").flatMap(connection => {
+          return this.getToken().map(newToken => {
+            connection.token = newToken;
+            this.saveConnection(connection);
+            return connection;
+          });
         });
       });
     }
