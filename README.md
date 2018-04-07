@@ -229,9 +229,9 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
 - install [CORS](https://www.drupal.org/project/cors) 
 - Go to admin/config/services/cors  and paste following into the textarea   
 
-`api/*|<mirror>|POST,PUT,GET,DELETE|Content-Type,X-CSRF-TOKEN|true`.
+`api/*|<mirror>|POST,PUT,GET,DELETE|Authentication,Accept,Content-Type,X-CSRF-TOKEN|true`.
 
-`services/session/token|<mirror>|GET|Content-Type,X-CSRF-TOKEN|true`.
+`services/session/token|<mirror>|GET|Authentication,Accept,Content-Type,X-CSRF-TOKEN|true`.
 
 ### Change Logs
 - **1.0.2**
@@ -268,3 +268,6 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
 
 - **1.4.1**
   - Refresh CSRF token after facebook connect
+
+- **1.4.2**
+  - Add Authentication header

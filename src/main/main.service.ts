@@ -106,6 +106,7 @@ export class MainService {
     if (token) {
       headers['X-CSRF-Token'] = token;
     }
+    headers['Authentication'] = `${this.getSavedVariable('session_name')}=${this.getSavedVariable('sessid')}`;
     if (DrupalConstants.Settings.cookieHeader) {
       headers['Cookie'] = `${this.getSavedVariable('session_name')}=${this.getSavedVariable('sessid')}`;
     }
