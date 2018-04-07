@@ -265,3 +265,6 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
 
 - **1.4.0**
   - Upgrade to use the new HttpClient :smirk:
+
+- **1.4.1**
+  - Refresh CSRF token after facebook connect
