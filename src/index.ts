@@ -22,7 +22,8 @@ import { ViewService } from './view/view.service';
 import { EntityService } from './entity/entity.service';
 import { MenuService } from './menu/menu.service';
 import { SystemConnection } from './models/system';
-import { FacebookOAuthService } from './fboauth/fboauth.service'
+import { FacebookOAuthService } from './fboauth/fboauth.service';
+import { PushNotificationsSerivce } from './push_notifications/push-notifications.service';
 
 /**
  * implement APP_INITIALIZER
@@ -62,6 +63,7 @@ export function init(systemService: SystemService): () => Promise<SystemConnecti
     EntityService,
     MenuService,
     FacebookOAuthService,
+    PushNotificationsSerivce,
     {
       'provide': APP_INITIALIZER,
       'useFactory': init,
@@ -93,7 +95,8 @@ export {
   ViewService,
   EntityService,
   MenuService,
-  FacebookOAuthService
+  FacebookOAuthService,
+  PushNotificationsSerivce
 };
 
 /**

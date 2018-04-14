@@ -1,9 +1,9 @@
 {
   "name": "ngx-drupal7-services",
-  "version": "1.4.2",
+  "version": "1.5.0",
   "license": "MIT",
   "scripts": {
-    "build": "rm -rf lib && ngc && npm run clean",
+    "build": "ngc",
     "clean": "rm -rf dist"
   },
   "private": false,

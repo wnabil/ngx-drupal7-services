@@ -121,6 +121,7 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
 - [x] [Services Entity](https://www.drupal.org/project/services_entity) **5 Resources**
 - [x] [Services Menu](https://www.drupal.org/project/services_menu) **1 Resources**
 - [x] [Services FBOauth](https://www.drupal.org/project/services_fboauth) **1 Resources**
+- [x] [Push Notifications](https://www.drupal.org/project/push_notifications) **2 Resources**
 - [ ] [Services Search](https://www.drupal.org/project/services_search) **2 Resources** // create an issue please if you want this to be implemented "PR welcome".
 
 - **Drupal Services**
@@ -198,8 +199,13 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
     - Retrieve
 
 - **Drupal Services FBOauth**
-  - Menus Resource
+  - FBOauth Resources
     - Connect
+
+- **Push Notifications**
+  - Push Notifications Resources
+    - Create
+    - Delete
 
 ## Setup for Drupal
 - Start with a fresh Drupal7 installation.
@@ -271,3 +277,6 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
 
 - **1.4.2**
   - Add Authentication header
+
+- **1.5.0**
+  - Add support for push notifications module

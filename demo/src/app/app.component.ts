@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {
   MainService, DrupalConstants, UserService, SystemService, NodeService, FileAttach, FileService,
   CommentService, TaxonomyTermService, TaxonomyVocabularyService, ViewService, ViewOptions, EntityService,
-  CustomEntityOptions, MenuService, FacebookOAuthService
+  CustomEntityOptions, MenuService, FacebookOAuthService, PushNotificationsSerivce, PushNotifications
 } from '../../../index';
 
 @Component({
@@ -29,7 +29,8 @@ export class AppComponent {
     private viewService: ViewService,
     private entityService: EntityService,
     private menuService: MenuService,
-    private facebookOAuthService: FacebookOAuthService
+    private facebookOAuthService: FacebookOAuthService,
+    private pushNotificationsSerivce: PushNotificationsSerivce,
   ) {
   }
 
@@ -481,6 +482,25 @@ export class AppComponent {
   fbOAuthConnect() {
     const accessToken = "mytoken";
     this.facebookOAuthService.connect(accessToken).subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  ////////////////////////////////////
+
+  create_push() {
+    const pushNotifications: PushNotifications =  {
+      type: 'android',
+      token: 'testtoken'
+    }
+    this.pushNotificationsSerivce.create(pushNotifications).subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  delete_push() {
+    const token = "testtoken";
+    this.pushNotificationsSerivce.delete_push(token).subscribe(data => {
       console.log(data);
     });
   }

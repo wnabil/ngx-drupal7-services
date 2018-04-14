@@ -21,17 +21,17 @@ import { Observable } from 'rxjs/Rx';
 export class AppModule {
   constructor () {
     const drupalSettings: Settings = {
-      apiEndPoint: 'api',
-      apiHost: 'localhost',
-      apiProtocol: 'http',
+      apiEndPoint: 'api/v1',
+      apiHost: 'stage.ikointl.com',
+      apiProtocol: 'https',
       language: 'und',
       requestTimeout: 5000,
-      allowOffline: true,
+      // allowOffline: true,
       sessionDays: 90,
     };
     DrupalConstants.Settings = drupalSettings;
     // OPTIONAL
-    DrupalConstants.Instance.handleOffline = this.customHandle;
+    // DrupalConstants.Instance.handleOffline = this.customHandle;
   }
 
   /**

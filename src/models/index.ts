@@ -13,3 +13,4 @@ export { TaxonomyVocabulary, TaxonomyVocabularyTree } from './taxonomy-vocabular
 export { ViewOptions } from './view';
 export { CustomEntityOptions } from './custom-entity';
 export { Menu, MenuItem, MenuItemLink } from './menu';
+export { PushNotifications, PushResponse } from './push-notifications';
