@@ -30,12 +30,17 @@ export class MainService {
    * structure a full entity for drupal request
    * @param entity the entity to be structured
    * @param ignoredFields fields to be ignored just like nid or uid or title
+   * @param fieldLabels: the label for each field just like "{field_custom_field: 'value'}"
    * @param language language of the entity
    */
-  structureEntity(entity: any, ignoredFields: string[], language?: string): any {
+  structureEntity(entity: any, ignoredFields: string[], fieldLabels?: any[], language?: string): any {
     Object.keys(entity).forEach((key: string, index: number) => {
       if (ignoredFields.indexOf(key) === -1) {
-        entity[key] = this.structureField(entity[key], key, language);
+        let fieldLabel;
+        if (fieldLabels[key]) {
+          fieldLabel = fieldLabels[key];
+        }
+        entity[key] = this.structureField(entity[key], fieldLabel, language);
       }
     });
     return entity;
@@ -44,7 +49,7 @@ export class MainService {
   /**
    * structure the field for drupal services request
    * @param value the field value
-   * @param label field name
+   * @param label field label name
    * @param language language of the field
    */
   structureField(value: any, label: string = "value", language?: string) {
