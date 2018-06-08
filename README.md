@@ -280,3 +280,9 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
 
 - **1.5.0**
   - Add support for push notifications module
+
+- **1.5.1**
+  - fix entity structure and add support for custom keys
+
+- **1.6.0**
+  - Upgrade to Angular 6

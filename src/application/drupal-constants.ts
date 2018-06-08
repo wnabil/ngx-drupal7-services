@@ -1,5 +1,6 @@
+
+import { throwError as observableThrowError, of as observableOf, Observable } from 'rxjs';
 import { Settings, SystemConnection } from '../models';
-import { Observable } from 'rxjs/Rx';
 
 /**
  * DrupalConstants singleton design pattern of the required settings and user connection.
@@ -25,9 +26,9 @@ export class DrupalConstants {
    */
   public handleOffline = function (err?: any): Observable<any> {
     if (this.settings.allowOffline) {
-      return Observable.of();
+      return observableOf();
     }
-    return Observable.throw(err);
+    return observableThrowError(err);
   }
 
   static get Instance() {
@@ -51,7 +52,7 @@ export class DrupalConstants {
    * Set the settings instanse on application init.
    * you can also do that at the runtime, Thanks to Singleton design pattern <3 !
    */
-  static set Settings (newSettings: Settings) {
+  static set Settings(newSettings: Settings) {
     this.Instance.settings = newSettings;
   }
 
@@ -75,14 +76,14 @@ export class DrupalConstants {
   /**
    * Updating connection instanse after login or rightaway after openning the connection
    */
-  static set Connection (newConnection: SystemConnection) {
+  static set Connection(newConnection: SystemConnection) {
     this.Instance.connection = newConnection;
   }
 
   /**
    * get the connection instance
    */
-  static get Connection (): SystemConnection {
+  static get Connection(): SystemConnection {
     return this.Instance.connection;
   }
 }

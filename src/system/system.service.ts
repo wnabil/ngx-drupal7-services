@@ -1,5 +1,7 @@
+
+import { mergeMap, map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 
 import { MainService } from '../main/main.service';
 import { DrupalConstants } from '../application/drupal-constants';
@@ -27,19 +29,19 @@ export class SystemService extends MainService {
     }
 
     if (!DrupalConstants.Connection || DrupalConstants.Connection.token || refreshToken) {
-      return this.getToken().flatMap(token => {
-        return this.post({}, "connect").map(connection => {
+      return this.getToken().pipe(mergeMap(token => {
+        return this.post({}, "connect").pipe(map(connection => {
           connection.token = token;
           this.saveConnection(connection);
           return connection;
-        });
-      });
+        }));
+      }));
     }
 
-    return this.post({}, "connect").map(connection => {
+    return this.post({}, "connect").pipe(map(connection => {
       this.saveConnection(connection);
       return connection;
-    });
+    }));
   }
 
   /**
@@ -48,7 +50,7 @@ export class SystemService extends MainService {
    * @return the value of the variable
    */
   getVariable(variableName: string): Observable<any[]> {
-    return this.post({name: variableName}, 'get_variable');
+    return this.post({ name: variableName }, 'get_variable');
   }
 
   /**
@@ -71,7 +73,7 @@ export class SystemService extends MainService {
    * @return null if variable found or not.
    */
   delVariable(variableName: string): Observable<null> {
-    return this.post({name: variableName}, 'del_variable');
+    return this.post({ name: variableName }, 'del_variable');
   }
 
   /**

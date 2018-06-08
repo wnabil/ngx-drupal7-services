@@ -1,7 +1,9 @@
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { catchError, timeout, map } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie';
-import { Observable } from 'rxjs/Rx';
 import { DrupalConstants } from '../application/drupal-constants';
 import { SystemConnection } from '../models/system';
 
@@ -131,11 +133,11 @@ export class MainService {
     const options = this.options;
     options['responseType'] = 'text';
     return this.httpRequestWithConfig(
-      this.httpClient.get(`${DrupalConstants.backEndUrl}services/session/token`, options), false
-    ).map(res => {
+      this.httpClient.get(`${DrupalConstants.backEndUrl}services/session/token`, options)
+    ).pipe(map(res => {
       this.cookieService.put("token", res);
       return res
-    });
+    }));
   }
 
   /**
@@ -148,7 +150,7 @@ export class MainService {
     }
     this.removeSession();
     DrupalConstants.Connection = connection;
-    this.cookieService.put(connection.session_name, connection.sessid, {httpOnly: true});
+    this.cookieService.put(connection.session_name, connection.sessid, { httpOnly: true });
     this.cookieService.put("sessid", connection.sessid);
     this.cookieService.put("session_name", connection.session_name);
     this.cookieService.put("timestamp", connection.user.timestamp.toString());
@@ -175,17 +177,12 @@ export class MainService {
   }
 
   /**
-   * adding http request configs: request timeout, error handler, json convert
-   * its a recursion method that will recall itself if the json convert is true
+   * adding http request configs: request timeout, error handler
    * @param httpObservableRequest the http Observable to request
-   * @param toJson to convert the response to json object
    * @return Observable of the request after adding required configs
    */
-  protected httpRequestWithConfig(httpObservableRequest: Observable<any>, toJson: boolean = true): Observable<any> {
-    if (toJson) {
-      return this.httpRequestWithConfig(httpObservableRequest, false);
-    }
-    return httpObservableRequest.timeout(DrupalConstants.Settings.requestTimeout).catch(err => DrupalConstants.Instance.handleOffline(err));
+  protected httpRequestWithConfig(httpObservableRequest: Observable<any>): Observable<any> {
+    return httpObservableRequest.pipe(timeout(DrupalConstants.Settings.requestTimeout), catchError(err => DrupalConstants.Instance.handleOffline(err)));
   }
 
   /**

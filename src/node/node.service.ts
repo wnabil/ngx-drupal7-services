@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 
 import { MainService } from '../main/main.service';
 import { FileEntity, CommentEntity, NodeEntity, CreatedNode, FileAttach } from '../models';
