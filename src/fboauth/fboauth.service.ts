@@ -1,5 +1,7 @@
+
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
+import { mergeMap, map } from 'rxjs/operators';
 
 import { MainService } from '../main/main.service';
 import { DrupalConstants } from '../application/drupal-constants';
@@ -32,21 +34,21 @@ export class FacebookOAuthService extends MainService {
     };
 
     if (!DrupalConstants.Connection || DrupalConstants.Connection.token) {
-      return this.getToken().flatMap(token => {
-        return this.post(body, "connect").flatMap(connection => {
-          return this.getToken().map(newToken => {
+      return this.getToken().pipe(mergeMap(token => {
+        return this.post(body, "connect").pipe(mergeMap(connection => {
+          return this.getToken().pipe(map(newToken => {
             connection.token = newToken;
             this.saveConnection(connection);
             return connection;
-          });
-        });
-      });
+          }));
+        }));
+      }));
     }
 
-    return this.post(body, "connect").map(connection => {
+    return this.post(body, "connect").pipe(map(connection => {
       this.saveConnection(connection);
       return connection;
-    });
+    }));
   }
 
   /**

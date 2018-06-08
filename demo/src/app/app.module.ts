@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 
 import { Drupal7ServicesModule, DrupalConstants, Settings } from '../../../index';
 
-import { Observable } from 'rxjs/Rx';
+import { Observable, of as observableOf } from 'rxjs';
 
 @NgModule({
   declarations: [
@@ -21,12 +21,12 @@ import { Observable } from 'rxjs/Rx';
 export class AppModule {
   constructor () {
     const drupalSettings: Settings = {
-      apiEndPoint: 'api/v1',
-      apiHost: 'stage.ikointl.com',
-      apiProtocol: 'https',
+      apiEndPoint: 'api/',
+      apiHost: 'localhost',
+      apiProtocol: 'http',
       language: 'und',
       requestTimeout: 5000,
-      // allowOffline: true,
+      allowOffline: true,
       sessionDays: 90,
     };
     DrupalConstants.Settings = drupalSettings;
@@ -41,6 +41,6 @@ export class AppModule {
    */
   customHandle() {
     alert("custom offline handler! you are offline");
-    return Observable.of();
+    return observableOf();
   }
 }

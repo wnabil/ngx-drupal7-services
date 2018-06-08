@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 
 import { MainService } from '../main/main.service';
 import { DrupalConstants } from '../application/drupal-constants';

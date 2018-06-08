@@ -1,5 +1,7 @@
+
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
+import { mergeMap, map } from 'rxjs/operators';
 
 import { MainService } from '../main/main.service';
 import { DrupalConstants } from '../application/drupal-constants';
@@ -66,10 +68,10 @@ export class UserService extends MainService {
    */
   login(user: LoginCredentials): Observable<SystemConnection> {
     const observer = this.post(user, 'login');
-    return observer.map((connection: SystemConnection) => {
+    return observer.pipe(map((connection: SystemConnection) => {
       this.saveConnection(connection);
       return connection;
-    });
+    }));
   }
 
   /**
@@ -78,12 +80,12 @@ export class UserService extends MainService {
    */
   logout(): Observable<string> {
     const observer = this.post({}, 'logout');
-    return observer.flatMap((loggedOut: boolean[]) => {
+    return observer.pipe(mergeMap((loggedOut: boolean[]) => {
       if (loggedOut[0]) {
         this.removeSession();
         return this.getToken();
       }
-    });
+    }));
   }
 
   /**

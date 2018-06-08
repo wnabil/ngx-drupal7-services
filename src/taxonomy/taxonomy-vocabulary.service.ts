@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable, of } from 'rxjs';
 
 import { MainService } from '../main/main.service';
 import { TaxonomyVocabulary, TaxonomyVocabularyTree } from '../models/taxonomy-vocabulary';
