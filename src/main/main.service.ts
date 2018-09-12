@@ -326,7 +326,7 @@ export class MainService {
       });
     } else if (value instanceof Object) {
       Object.keys(value).forEach((element, index) => {
-        if (value instanceof Object) {
+        if (element instanceof Object) {
           str += this.serializeObject(value[element], `${key}[${element}]`);
         } else {
           str += `${key}[${element}]=${value[element]}&`;
@@ -344,7 +344,8 @@ export class MainService {
    */
   private serializeObject(obj: any, parentSerialized: string): string {
     var str = '';
-    Object.keys(obj).forEach((key, index) => {
+    Object.keys(obj).
+    ((key, index) => {
       const value = obj[key];
       if (value instanceof Object) {
         str += `${this.serializeObject(value, `${parentSerialized}[${key}]`)}`;
