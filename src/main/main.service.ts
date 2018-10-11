@@ -325,8 +325,8 @@ export class MainService {
         str += `${key}[${index}]=${element}&`;
       });
     } else if (value instanceof Object) {
-      Object.keys(value).forEach((element, index) => {
-        if (value instanceof Object) {
+      Object.keys(value).forEach((element:any, index) => {
+        if (element instanceof Object) {
           str += this.serializeObject(value[element], `${key}[${element}]`);
         } else {
           str += `${key}[${element}]=${value[element]}&`;
