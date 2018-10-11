@@ -344,8 +344,7 @@ export class MainService {
    */
   private serializeObject(obj: any, parentSerialized: string): string {
     var str = '';
-    Object.keys(obj).
-    ((key, index) => {
+    Object.keys(obj).((key, index) => {
       const value = obj[key];
       if (value instanceof Object) {
         str += `${this.serializeObject(value, `${parentSerialized}[${key}]`)}`;
