@@ -53,7 +53,7 @@ export class FileService extends MainService {
    * this require rest support for form multi data
    */
   createRaw(): Observable<boolean[]> {
-    return this.post('create_raw');
+    return this.post({}, 'create_raw');
   }
 
 }
