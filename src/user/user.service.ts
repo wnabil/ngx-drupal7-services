@@ -131,7 +131,7 @@ export class UserService extends MainService {
    * @see http://BACKEND/admin/config/people/accounts
    */
   cancelUser(uid: number): Observable<boolean[]> {
-    return this.post(`${uid}/cancel`);
+    return this.post({}, `${uid}/cancel`);
   }
 
   /**
@@ -140,7 +140,7 @@ export class UserService extends MainService {
    * @return array of boolean, true if user password has been resetted, false otherwhise
    */
   passwordReset(uid: number): Observable<boolean[]> {
-    return this.post(`${uid}/password_reset`);
+    return this.post({}, `${uid}/password_reset`);
   }
 
   /**
@@ -150,7 +150,7 @@ export class UserService extends MainService {
    * if the server is not a mail server or if there is not mail server configuration this will always return false
    */
   resendWelcomeEmail(uid: number): Observable<boolean[]> {
-    return this.post(`${uid}/resend_welcome_email`);
+    return this.post({}, `${uid}/resend_welcome_email`);
   }
 
   /**
