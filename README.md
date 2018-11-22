@@ -13,11 +13,9 @@ A full set of Drupal's resources is available, and all basic workflow's dependin
 Also supports Server Side Rendering "Angular Universal".
 
 ## DEMOS
-Check out the [Demo folder](https://github.com/wnabil/ngx-drupal7-services/tree/master/demo) for a full demo.
-
 Running the demo:
 ```bash
-git clone git@github.com:wnabil/ngx-drupal7-services.git
+git clone https://github.com/wnabil/ngx-drupal7-services.git
 cd ngx-drupal7-services
 npm install
 ng serve
