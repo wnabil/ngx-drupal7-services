@@ -1,25 +1,25 @@
 {
   "name": "ngx-drupal7-services",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "license": "MIT",
   "scripts": {
-    "build": "ngc",
+    "build": "tsc",
     "clean": "rm -rf dist"
   },
   "private": false,
   "dependencies": {
+    "ngx-cookie": "^4.0.2"
+  },
+  "devDependencies": {
+    "rxjs": "^6.2.0",
+    "rxjs-compat": "^6.2.0",
+    "zone.js": "^0.8.26",
     "@angular/common": "^6.0.4",
     "@angular/compiler": "^6.0.4",
     "@angular/core": "^6.0.4",
     "@angular/platform-browser": "^6.0.4",
     "@angular/platform-browser-dynamic": "^6.0.4",
     "core-js": "^2.5.7",
-    "ngx-cookie": "^4.0.2",
-    "rxjs": "^6.2.0",
-    "rxjs-compat": "^6.2.0",
-    "zone.js": "^0.8.26"
-  },
-  "devDependencies": {
     "@angular-devkit/build-angular": "~0.6.8",
     "@angular/cli": "6.0.8",
     "@angular/compiler-cli": "^6.0.4",
