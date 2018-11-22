@@ -291,3 +291,8 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
   - remove node_modules
   - fix dependencies
   - fix broken post methods in user, file resources issue #12
+
+- **1.7.0**
+  - upgrade to angular 7
+  - use ng library and ng packagr
+  - use localstorage and remove angular cookies
