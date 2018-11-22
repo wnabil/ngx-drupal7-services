@@ -286,3 +286,8 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
 
 - **1.6.0**
   - Upgrade to Angular 6
+
+- **1.6.1**
+  - remove node_modules
+  - fix dependencies
+  - fix broken post methods in user, file resources issue #12
