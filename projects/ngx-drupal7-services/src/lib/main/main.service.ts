@@ -166,11 +166,11 @@ export class MainService {
     let request_url = DrupalConstants.restUrl;
 
     if (this.entityType) {
-      request_url += this.entityType + '/';
+      request_url += this.entityType;
     }
 
     if (resource) {
-      request_url += resource;
+      request_url += '/' + resource;
     }
 
     return request_url;
