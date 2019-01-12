@@ -294,3 +294,6 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
   - upgrade to angular 7
   - use ng library and ng packagr
   - use localstorage and remove angular cookies
+- **1.7.1**
+  - fix #18 - remove no resouce trailing slash
+  - fix #15 - fix object filters serialize for view resource
