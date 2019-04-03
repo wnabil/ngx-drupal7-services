@@ -135,7 +135,8 @@ export class MainService {
     return this.httpRequestWithConfig(
       this.httpClient.get(`${DrupalConstants.backEndUrl}services/session/token`, options)
     ).pipe(map(res => {
-      localStorage.setItem('token', res);
+      let storage = DrupalConstants.Settings.localStorage ? DrupalConstants.Settings.localStorage : localStorage;
+      storage.setItem('token', res);
       return res;
     }));
   }
@@ -150,11 +151,12 @@ export class MainService {
     }
     this.removeSession();
     DrupalConstants.Connection = connection;
-    localStorage.setItem(connection.session_name, connection.sessid);
-    localStorage.setItem('sessid', connection.sessid);
-    localStorage.setItem('session_name', connection.session_name);
-    localStorage.setItem('timestamp', connection.user.timestamp.toString());
-    localStorage.setItem('token', connection.token);
+    let storage = DrupalConstants.Settings.localStorage ? DrupalConstants.Settings.localStorage : localStorage;
+    storage.setItem(connection.session_name, connection.sessid);
+    storage.setItem('sessid', connection.sessid);
+    storage.setItem('session_name', connection.session_name);
+    storage.setItem('timestamp', connection.user.timestamp.toString());
+    storage.setItem('token', connection.token);
   }
 
   /**
@@ -238,7 +240,7 @@ export class MainService {
    * Clearing drupal session after logging out
    */
   protected removeSession(): void {
-    localStorage.clear();
+    DrupalConstants.Settings.localStorage ? DrupalConstants.Settings.localStorage.clear() : localStorage.clear();
   }
 
   /**
@@ -308,8 +310,8 @@ export class MainService {
         return DrupalConstants.Connection.user[variableName];
       }
     }
-
-    return localStorage.getItem(variableName);
+    let storage = DrupalConstants.Settings.localStorage ? DrupalConstants.Settings.localStorage : localStorage;
+    return storage.getItem(variableName);
   }
 
   /**
