@@ -170,7 +170,11 @@ export class MainService {
     }
 
     if (resource) {
-      request_url += '/' + resource;
+      if (request_url[request_url.length - 1] === '/') {
+        request_url += resource;
+      } else {
+        request_url += '/' + resource;
+      }
     }
 
     return request_url;
