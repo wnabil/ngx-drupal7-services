@@ -297,3 +297,6 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
 - **1.7.1**
   - fix #18 - remove no resouce trailing slash
   - fix #15 - fix object filters serialize for view resource
+
+- **1.7.2**
+  - fix app clearing all localStorage :sweat:

@@ -238,7 +238,13 @@ export class MainService {
    * Clearing drupal session after logging out
    */
   protected removeSession(): void {
-    localStorage.clear();
+    localStorage.removeItem('token');
+    localStorage.removeItem('timestamp');
+    localStorage.removeItem('sessid');
+    localStorage.removeItem('session_name');
+    if (DrupalConstants.Connection && DrupalConstants.Connection.session_name) {
+      localStorage.removeItem(DrupalConstants.Connection.session_name);
+    }
   }
 
   /**
