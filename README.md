@@ -300,3 +300,6 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
 
 - **1.7.2**
   - fix app clearing all localStorage :sweat:
+
+- **1.7.3**
+  - fix double slash in custom resources
