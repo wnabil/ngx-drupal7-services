@@ -13,11 +13,9 @@ A full set of Drupal's resources is available, and all basic workflow's dependin
 Also supports Server Side Rendering "Angular Universal".
 
 ## DEMOS
-Check out the [Demo folder](https://github.com/wnabil/ngx-drupal7-services/tree/master/demo) for a full demo.
-
 Running the demo:
 ```bash
-git clone git@github.com:wnabil/ngx-drupal7-services.git
+git clone https://github.com/wnabil/ngx-drupal7-services.git
 cd ngx-drupal7-services
 npm install
 ng serve
@@ -286,3 +284,22 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
 
 - **1.6.0**
   - Upgrade to Angular 6
+
+- **1.6.1**
+  - remove node_modules
+  - fix dependencies
+  - fix broken post methods in user, file resources issue #12
+
+- **1.7.0**
+  - upgrade to angular 7
+  - use ng library and ng packagr
+  - use localstorage and remove angular cookies
+- **1.7.1**
+  - fix #18 - remove no resouce trailing slash
+  - fix #15 - fix object filters serialize for view resource
+
+- **1.7.2**
+  - fix app clearing all localStorage :sweat:
+
+- **1.7.3**
+  - fix double slash in custom resources

@@ -1,0 +1,7 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/ngx-drupal7-services",
+  "lib": {
+    "entryFile": "src/public_api.ts"
+  }
+}
