@@ -33,7 +33,7 @@ export class FacebookOAuthService extends MainService {
       access_token: accessToken
     };
 
-    if (!DrupalConstants.Connection || DrupalConstants.Connection.token) {
+    if (!DrupalConstants.Connection || !DrupalConstants.Connection.token) {
       return this.getToken().pipe(mergeMap(token => {
         return this.post(body, 'connect').pipe(mergeMap(connection => {
           return this.getToken().pipe(map(newToken => {
