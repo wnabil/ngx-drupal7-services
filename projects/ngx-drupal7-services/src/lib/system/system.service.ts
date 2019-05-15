@@ -28,7 +28,7 @@ export class SystemService extends MainService {
       this.removeSession();
     }
 
-    if (!DrupalConstants.Connection || DrupalConstants.Connection.token || refreshToken) {
+    if (!DrupalConstants.Connection || !DrupalConstants.Connection.token || refreshToken) {
       return this.getToken().pipe(mergeMap(token => {
         return this.post({}, 'connect').pipe(map(connection => {
           connection.token = token;
