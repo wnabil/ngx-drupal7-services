@@ -121,6 +121,7 @@ export class MainService {
       headers: headers,
       withCredentials: true,
       reportProgress: true,
+      observe: 'events'
     };
     return options;
   }
