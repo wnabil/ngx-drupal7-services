@@ -303,3 +303,7 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
 
 - **1.7.3**
   - fix double slash in custom resources
+
+- **1.7.4**
+  - PR #28 - Fix token refresh on connect
+  - PR #26 - Add httpClient event option
