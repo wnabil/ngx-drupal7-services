@@ -18,7 +18,8 @@ export class FacebookOAuthService extends MainService {
   entityType = 'fboauth';
 
   /**
-   * if there is already a token in the browser cookies and it is not expired it returns or this will fetch a new token before trying to connect
+   * if there is already a token in the browser cookies and it is not expired it returns
+   * this will fetch a new token before trying to connect
    * @param accessToken string of the recieved access token
    * @return observable of the connect method
    * the subscription data is an object of SystemConnection interface
@@ -38,7 +39,7 @@ export class FacebookOAuthService extends MainService {
         return this.post(body, 'connect').pipe(mergeMap(connection => {
           return this.getToken().pipe(map(newToken => {
             connection.token = newToken;
-            this.saveConnection(connection);
+            this.saveSessionToken(connection);
             return connection;
           }));
         }));
@@ -46,19 +47,8 @@ export class FacebookOAuthService extends MainService {
     }
 
     return this.post(body, 'connect').pipe(map(connection => {
-      this.saveConnection(connection);
+      this.saveSessionToken(connection);
       return connection;
     }));
-  }
-
-  /**
-   * save the user connection
-   * @param connection the drupal user connection object
-   */
-  saveConnection(connection: SystemConnection): void {
-    if (!connection.user.timestamp) {
-      connection.user.timestamp = Math.floor(Date.now());
-    }
-    this.saveSessionToken(connection);
   }
 }

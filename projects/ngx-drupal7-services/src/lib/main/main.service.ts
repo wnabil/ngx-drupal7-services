@@ -121,7 +121,6 @@ export class MainService {
       headers: headers,
       withCredentials: true,
       reportProgress: true,
-      observe: 'events'
     };
     return options;
   }
@@ -154,8 +153,12 @@ export class MainService {
     localStorage.setItem(connection.session_name, connection.sessid);
     localStorage.setItem('sessid', connection.sessid);
     localStorage.setItem('session_name', connection.session_name);
-    localStorage.setItem('timestamp', connection.user.timestamp.toString());
     localStorage.setItem('token', connection.token);
+    if (connection.user && connection.user.timestamp) {
+      localStorage.setItem('timestamp', connection.user.timestamp.toString());
+    } else {
+      localStorage.setItem('timestamp', Math.floor(Date.now()).toString());
+    }
   }
 
   /**
