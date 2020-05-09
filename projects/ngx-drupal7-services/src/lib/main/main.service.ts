@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { catchError, timeout, map } from 'rxjs/operators';
 import { DrupalConstants } from '../application/drupal-constants';
 import { SystemConnection } from '../models/system';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformServer } from '@angular/common';
 
 /**
  * the main service is the basic http service of all other services "parent" that implements all the required request.
@@ -136,7 +136,7 @@ export class MainService {
     return this.httpRequestWithConfig(
       this.httpClient.get(`${DrupalConstants.backEndUrl}services/session/token`, options)
     ).pipe(map(res => {
-      if (isPlatformBrowser(this.platformId)) {
+      if (!isPlatformServer(this.platformId)) {
         localStorage.setItem('token', res);
       }
       return res;
@@ -153,7 +153,7 @@ export class MainService {
     }
     this.removeSession();
     DrupalConstants.Connection = connection;
-    if (isPlatformBrowser(this.platformId)) {
+    if (!isPlatformServer(this.platformId)) {
       localStorage.setItem(connection.session_name, connection.sessid);
       localStorage.setItem('sessid', connection.sessid);
       localStorage.setItem('session_name', connection.session_name);
@@ -251,7 +251,7 @@ export class MainService {
    * Clearing drupal session after logging out
    */
   protected removeSession(): void {
-    if (isPlatformBrowser(this.platformId)) {
+    if (!isPlatformServer(this.platformId)) {
       localStorage.removeItem('token');
       localStorage.removeItem('timestamp');
       localStorage.removeItem('sessid');
@@ -329,7 +329,7 @@ export class MainService {
         return DrupalConstants.Connection.user[variableName];
       }
     }
-    if (isPlatformBrowser(this.platformId)) {
+    if (!isPlatformServer(this.platformId)) {
       return localStorage.getItem(variableName);
     }
     return;
