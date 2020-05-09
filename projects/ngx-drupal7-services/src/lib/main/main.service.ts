@@ -1,10 +1,11 @@
 
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError, timeout, map } from 'rxjs/operators';
 import { DrupalConstants } from '../application/drupal-constants';
 import { SystemConnection } from '../models/system';
+import { isPlatformBrowser } from '@angular/common';
 
 /**
  * the main service is the basic http service of all other services "parent" that implements all the required request.
@@ -25,7 +26,7 @@ export class MainService {
    * @see https://angular.io/guide/dependency-injection
    * @see https://www.npmjs.com/package/ngx-cookie
    */
-  constructor(protected httpClient: HttpClient) { }
+  constructor(protected httpClient: HttpClient, @Inject(PLATFORM_ID) private platformId: Object) { }
 
   /**
    * structure a full entity for drupal request
@@ -135,7 +136,9 @@ export class MainService {
     return this.httpRequestWithConfig(
       this.httpClient.get(`${DrupalConstants.backEndUrl}services/session/token`, options)
     ).pipe(map(res => {
-      localStorage.setItem('token', res);
+      if (isPlatformBrowser(this.platformId)) {
+        localStorage.setItem('token', res);
+      }
       return res;
     }));
   }
@@ -150,14 +153,16 @@ export class MainService {
     }
     this.removeSession();
     DrupalConstants.Connection = connection;
-    localStorage.setItem(connection.session_name, connection.sessid);
-    localStorage.setItem('sessid', connection.sessid);
-    localStorage.setItem('session_name', connection.session_name);
-    localStorage.setItem('token', connection.token);
-    if (connection.user && connection.user.timestamp) {
-      localStorage.setItem('timestamp', connection.user.timestamp.toString());
-    } else {
-      localStorage.setItem('timestamp', Math.floor(Date.now()).toString());
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem(connection.session_name, connection.sessid);
+      localStorage.setItem('sessid', connection.sessid);
+      localStorage.setItem('session_name', connection.session_name);
+      localStorage.setItem('token', connection.token);
+      if (connection.user && connection.user.timestamp) {
+        localStorage.setItem('timestamp', connection.user.timestamp.toString());
+      } else {
+        localStorage.setItem('timestamp', Math.floor(Date.now()).toString());
+      }
     }
   }
 
@@ -246,12 +251,14 @@ export class MainService {
    * Clearing drupal session after logging out
    */
   protected removeSession(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('timestamp');
-    localStorage.removeItem('sessid');
-    localStorage.removeItem('session_name');
-    if (DrupalConstants.Connection && DrupalConstants.Connection.session_name) {
-      localStorage.removeItem(DrupalConstants.Connection.session_name);
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('timestamp');
+      localStorage.removeItem('sessid');
+      localStorage.removeItem('session_name');
+      if (DrupalConstants.Connection && DrupalConstants.Connection.session_name) {
+        localStorage.removeItem(DrupalConstants.Connection.session_name);
+      }
     }
   }
 
@@ -322,8 +329,10 @@ export class MainService {
         return DrupalConstants.Connection.user[variableName];
       }
     }
-
-    return localStorage.getItem(variableName);
+    if (isPlatformBrowser(this.platformId)) {
+      return localStorage.getItem(variableName);
+    }
+    return;
   }
 
   /**
