@@ -3,7 +3,7 @@
   "license": "MIT",
   "private": false,
   "description": "# Angular 2+/Ionic 2+ Drupal 7 Services #### Typescript angular module for [Drupal Services 3.x](https://www.drupal.org/project/services)",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "peerDependencies": {
     "@angular/common": "^8.1.1",
     "@angular/core": "^8.1.1"
