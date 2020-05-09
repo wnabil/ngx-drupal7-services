@@ -316,8 +316,6 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
 
 -**1.8.0**
   - Upgrade to Angular 8
-  
 
 -**1.8.1**
   - SSR support
-  
