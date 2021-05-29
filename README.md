@@ -320,5 +320,5 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
 - **1.8.1**
   - SSR support
 
-- **1.12.0**
+- **1.12.1**
   - Upgrade to Angular 12
