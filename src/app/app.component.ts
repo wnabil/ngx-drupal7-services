@@ -298,13 +298,13 @@ export class AppComponent {
     });
   }
 
-  countAllByNodeId(nid: number) {
+  countAllByNodeId() {
     this.commentService.countAllCommentsByNodeId(2).subscribe(data => {
       console.log(data);
     });
   }
 
-  countNewCommentsByNodeId(nid: number) {
+  countNewCommentsByNodeId() {
     this.commentService.countNewCommentsByNodeId(2).subscribe(data => {
       console.log(data);
     });
