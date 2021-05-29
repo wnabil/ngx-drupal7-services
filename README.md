@@ -314,8 +314,11 @@ Here is a list of supported Drupal services 3.x modules "Others are still WIP":
 - **1.7.6**
   - Revert PR #26
 
--**1.8.0**
+- **1.8.0**
   - Upgrade to Angular 8
 
--**1.8.1**
+- **1.8.1**
   - SSR support
+
+- **1.12.0**
+  - Upgrade to Angular 12
